@@ -1,25 +1,25 @@
 const { Request, Response } = require("express");
-const bookService = require("../services/book.service");
+const trainingService = require("../services/training.service");
 const { ErrorResponse } = require("../utils/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
 } = require("../utils/success.response");
 
-const bookController = {
+const trainingController = {
   /**
-   * Search Books
+   * Search Trainings
    * @param {Request} req
    * @param {Response} res
    */
   search: async (req, res) => {
     const terms = req.params.terms;
-    const { books, count } = await bookService.search(terms);
+    const { books, count } = await trainingService.search(terms);
     res.status(200).json(new SuccessArrayResponse(books, count));
   },
 
   /**
-   * Get All Books
+   * Get All Trainings
    * @param {Request} req
    * @param {Response} res
    */
@@ -27,18 +27,22 @@ const bookController = {
     const { offset, limit } = req.pagination;
     const genreId = req.query.genreId;
     console.log(req);
-    const { books, count } = await bookService.getAll(offset, limit, genreId);
-    res.status(200).json(new SuccessArrayResponse(books, count));
+    const { trainings, count } = await trainingService.getAll(
+      offset,
+      limit,
+      genreId
+    );
+    res.status(200).json(new SuccessArrayResponse(trainings, count));
   },
 
   /**
-   * Get a Book By Id
+   * Get a Training By Id
    * @param {Request} req
    * @param {Response} res
    */
   getById: async (req, res) => {
     const { id } = req.params;
-    const book = await bookService.getById(id);
+    const book = await trainingService.getById(id);
     if (!book) {
       res.sendStatus(404);
       return;
@@ -47,26 +51,26 @@ const bookController = {
   },
 
   /**
-   * Create a Book
+   * Create a Training
    * @param {Request} req
    * @param {Response} res
    */
   create: async (req, res) => {
     const data = req.body;
-    const book = await bookService.create(data);
-    res.location("/book/" + book.id);
-    res.status(201).json(new SuccessResponse(book, 201));
+    const training = await trainingService.create(data);
+    res.location("/trainings/" + training.id);
+    res.status(201).json(new SuccessResponse(training, 201));
   },
 
   /**
-   * Update a Book
+   * Update a Training
    * @param {Request} req
    * @param {Response} res
    */
   update: async (req, res) => {
     const { id } = req.params;
     const data = req.body;
-    const updated = await bookService.update(id, data);
+    const updated = await trainingService.update(id, data);
     if (!updated) {
       res.sendStatus(404);
       return;
@@ -76,13 +80,13 @@ const bookController = {
   },
 
   /**
-   * Delete a Book
+   * Delete a Training
    * @param {Request} req
    * @param {Response} res
    */
   delete: async (req, res) => {
     const { id } = req.params;
-    const deleted = await bookService.delete(id);
+    const deleted = await trainingService.delete(id);
     if (!deleted) {
       res.sendStatus(404);
       return;
@@ -91,7 +95,7 @@ const bookController = {
   },
 
   /**
-   * Update a Book cover
+   * Update a Training cover
    * @param {Request} req
    * @param {Response} res
    */
@@ -99,7 +103,7 @@ const bookController = {
     const { id } = req.params;
     console.log("controller file : ", req.file);
     const filename = req.file.filename;
-    const isUpdated = await bookService.updateCover(id, filename);
+    const isUpdated = await trainingService.updateCover(id, filename);
     if (!isUpdated) {
       res.status(404).json(new ErrorResponse("Album not found", 404));
       return;
@@ -112,4 +116,4 @@ const bookController = {
   },
 };
 
-module.exports = bookController;
+module.exports = trainingController;

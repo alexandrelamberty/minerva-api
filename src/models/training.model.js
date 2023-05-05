@@ -25,6 +25,14 @@ module.exports = (sequelize) => {
           notEmpty: true,
         },
       },
+      startDate: {
+        type: DataTypes.DATE(),
+        allowNull: false,
+      },
+      endDate: {
+        type: DataTypes.DATE(),
+        allowNull: false,
+      },
     },
     {
       tableName: "training",

@@ -1,32 +1,31 @@
 const { Request, Response } = require("express");
-const orderService = require("../services/order.service");
+const materialService = require("../services/material.service");
 const { ErrorResponse } = require("../utils/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
 } = require("../utils/success.response");
 
-const orderController = {
+const materialController = {
   /**
-   * Get All Orders
+   * Get All Materials
    * @param {Request} req
    * @param {Response} res
    */
   getAll: async (req, res) => {
-    console.log("Get All Orders controller");
     const { offset, limit } = req.pagination;
-    const { orders, count } = await orderService.getAll(offset, limit);
+    const { orders, count } = await materialService.getAll(offset, limit);
     res.status(200).json(new SuccessArrayResponse(orders, count));
   },
 
   /**
-   * Get an Order By Id
+   * Get a Material By Id
    * @param {Request} req
    * @param {Response} res
    */
   getById: async (req, res) => {
     const { id } = req.params;
-    const order = await orderService.getById(id);
+    const order = await materialService.getById(id);
     if (!order) {
       res.sendStatus(404);
       return;
@@ -35,30 +34,28 @@ const orderController = {
   },
 
   /**
-   * Create an Order
+   * Create a Material
    * @param {Request} req
    * @param {Response} res
    */
   create: async (req, res) => {
     console.log("CREATE ORDER CONTROLLER");
     const data = req.body;
-    console.log(req.user);
-    const userId = req.user.id;
-    const order = await orderService.create(userId, data);
+    const courseId = req.user.id;
+    const order = await materialService.create(courseId, data);
     res.location("/order/" + order.id);
     res.status(201).json(new SuccessResponse(order, 201));
   },
 
   /**
-   * Update an Order
+   * Update a Material
    * @param {Request} req
    * @param {Response} res
    */
   update: async (req, res) => {
     const { id } = req.params;
     const data = req.body;
-
-    const updated = await orderService.update(id, data);
+    const updated = await materialService.update(id, data);
     if (!updated) {
       res.sendStatus(404);
       return;
@@ -67,13 +64,13 @@ const orderController = {
   },
 
   /**
-   * Delete an Order
+   * Delete a Material
    * @param {Request} req
    * @param {Response} res
    */
   delete: async (req, res) => {
     const { id } = req.params;
-    const deleted = await orderService.delete(id);
+    const deleted = await materialService.delete(id);
     if (!deleted) {
       res.sendStatus(404);
       return;
@@ -82,4 +79,4 @@ const orderController = {
   },
 };
 
-module.exports = orderController;
+module.exports = materialController;

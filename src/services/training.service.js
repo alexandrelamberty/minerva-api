@@ -1,6 +1,6 @@
 const { where, Op } = require("sequelize");
-const { TrainingDTO } = require("../dto/course.dto");
-const { TrainingCategory, CourseMaterial, CourseDate } = require("../models");
+const { TrainingDTO } = require("../dto/training.dto");
+const { Category, CourseMaterial, CourseDate } = require("../models");
 const db = require("../models");
 
 const trainingService = {
@@ -12,7 +12,7 @@ const trainingService = {
         },
       },
       distinct: true,
-      include: [TrainingCategory],
+      include: [Category],
     });
     return {
       trainings: rows.map((track) => new TrainingDTO(track)),
@@ -25,6 +25,7 @@ const trainingService = {
       distinct: true,
       offset,
       limit,
+      include: [Category, db.Course],
     });
     return {
       trainings: rows.map((training) => new TrainingDTO(training)),
@@ -33,64 +34,49 @@ const trainingService = {
   },
 
   getAllByCategoryId: async (id) => {
-    const book = await db.Training.findAll(id, {
-      include: [TrainingCategory],
+    const training = await db.Training.findAll(id, {
+      include: [Category],
     });
-    return book ? new TrainingDTO(book) : null;
+    return training ? new TrainingDTO(training) : null;
   },
 
   getById: async (id) => {
     const training = await db.Training.findByPk(id, {
-      include: [TrainingCategory],
+      include: [Category, db.Course],
     });
     return training ? new TrainingDTO(training) : null;
   },
 
   create: async (trainingToAdd) => {
-    const transaction = await db.sequelize.transaction();
-    let training;
-    try {
-      training = await db.Training.create(trainingToAdd, { transaction });
-      for (const course of trainingToAdd.courses) {
-        await training.addCourse(course.id, { transaction });
-      }
-      await transaction.commit();
-
-      const addedTraining = await db.Training.findByPk(training.id, {
-        include: [TrainingCategory],
-      });
-
-      return addedTraining ? new TrainingDTO(addedTraining) : null;
-    } catch (err) {
-      await transaction.rollback();
-      return null;
-    }
+    console.log(trainingToAdd);
+    const training = await db.Training.create(trainingToAdd);
+    return training ? new TrainingDTO(training) : null;
   },
 
   update: async (id, trainingToUpdate) => {
     const transaction = await db.sequelize.transaction();
     console.log(trainingToUpdate);
 
-    // Retrieve de book
+    // Retrieve the training
     const training = await db.Training.findByPk(id, {
       include: [Genre, Publisher, Author],
     });
 
     try {
-      // Remove the Author associations
+      // Remove the Courses associations
       training.setCourses([]);
-      // Update the Author associations
+      // Update the Courses associations
       for (const course of trainingToUpdate.courses) {
         await training.addCourse(course.id, { transaction });
       }
-      // Update the book details
+      // Update the Training details
       const updatedRow = await db.Training.update(
         trainingToUpdate,
         {
           where: { id },
         },
         {
-          include: [db.TrainingCategory],
+          include: [db.Category],
         }
       );
       await transaction.commit();

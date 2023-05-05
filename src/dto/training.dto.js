@@ -1,3 +1,4 @@
+const { StudentDTO } = require("./student.dto");
 const { UserDTO } = require("./user.dto");
 
 class TrainingDTO {
@@ -9,7 +10,7 @@ class TrainingDTO {
     endDate,
     TrainingCategory,
     Courses,
-    Users,
+    Students,
   }) {
     this.id = id;
     this.title = title;
@@ -18,7 +19,9 @@ class TrainingDTO {
     this.endDate = endDate;
     this.category = TrainingCategory;
     this.courses = Courses;
-    this.users = Users ? Users.map((user) => new UserDTO(user)) : [];
+    this.students = Students
+      ? Students.map((user) => new StudentDTO(user))
+      : [];
   }
 }
 

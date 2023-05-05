@@ -1,11 +1,11 @@
 const { Op } = require("sequelize");
-const { GenreDTO } = require("../dto/genre.dto");
+const { CategoryDTO } = require("../dto/training-category.dto");
 const db = require("../models");
 
-const genreService = {
+const trainingCategoryService = {
   search: async (terms) => {
     console.log("Search terms", terms);
-    const { rows, count } = await db.Genre.findAndCountAll({
+    const { rows, count } = await db.Category.findAndCountAll({
       where: {
         name: {
           [Op.like]: `${terms}%`,
@@ -15,54 +15,55 @@ const genreService = {
       distinct: true,
     });
     return {
-      genres: rows.map((genre) => new GenreDTO(genre)),
+      categories: rows.map((category) => new CategoryDTO(category)),
       count,
     };
   },
 
   getAll: async (offset, limit) => {
-    const { rows, count } = await db.Genre.findAndCountAll({
+    const { rows, count } = await db.Category.findAndCountAll({
       distinct: true,
       offset: offset,
       limit: limit,
-      include: [db.Book],
+      include: [db.Training],
     });
+    console.log(rows);
     return {
-      genres: rows.map((genre) => new GenreDTO(genre)),
+      categories: rows.map((category) => new CategoryDTO(category)),
       count,
     };
   },
 
   getById: async (id) => {
-    const genre = await db.Genre.findByPk(id, {
-      include: [db.Book],
+    const category = await db.Category.findByPk(id, {
+      include: [db.Training],
     });
-    return genre ? new GenreDTO(genre) : null;
+    return category ? new CategoryDTO(category) : null;
   },
 
-  create: async (genreToAdd) => {
-    const genre = await db.Genre.create(genreToAdd);
-    return genre ? new GenreDTO(genre) : null;
+  create: async (categoryToAdd) => {
+    const category = await db.Category.create(categoryToAdd);
+    return category ? new CategoryDTO(category) : null;
   },
 
-  update: async (id, genreToUpdate) => {
-    const updatedRow = await db.Genre.update(genreToUpdate, {
+  update: async (id, categoryToUpdate) => {
+    const updatedRow = await db.Category.update(categoryToUpdate, {
       where: { id },
     });
     return updatedRow[0] === 1;
   },
 
   delete: async (id) => {
-    const nbDeletedRow = await db.Genre.destroy({
+    const nbDeletedRow = await db.Category.destroy({
       where: { id },
     });
     return nbDeletedRow === 1;
   },
 
   nameAlreadyExists: async (name) => {
-    const genre = await db.Genre.findOne({ where: { name } });
-    return genre ? true : false;
+    const category = await db.Category.findOne({ where: { name } });
+    return category ? true : false;
   },
 };
 
-module.exports = genreService;
+module.exports = trainingCategoryService;

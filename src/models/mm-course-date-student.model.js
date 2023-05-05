@@ -10,13 +10,13 @@ const db = require(".");
 // https://sequelize.org/docs/v6/core-concepts/assocs/#many-to-many-relationships
 // https://sequelize.org/docs/v6/advanced-association-concepts/advanced-many-to-many/#the-best-of-both-worlds-the-super-many-to-many-relationship
 module.exports = (sequelize) => {
-  const MM_Course_Attendance = sequelize.define(
-    "MM_Course_Attendance",
+  const MM_CourseDate_Student = sequelize.define(
+    "MM_CourseDate_Student",
     {
-      UserId: {
+      StudentId: {
         type: DataTypes.INTEGER,
         references: {
-          model: "User",
+          model: "Student",
           key: "id",
         },
       },
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
-      presence: {
+      attendance: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
@@ -37,9 +37,9 @@ module.exports = (sequelize) => {
       },
     },
     {
-      tableName: "course_attendance",
+      tableName: "MM_CourseDate_Student",
     }
   );
 
-  return MM_Course_Attendance;
+  return MM_CourseDate_Student;
 };

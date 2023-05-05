@@ -1,21 +1,13 @@
-const { CourseDateDTO } = require("./course-date.dto");
 const { CourseMaterialDTO } = require("./course-material.dto");
 
 class CourseDTO {
-  constructor({
-    id,
-    name,
-    description,
-    Training,
-    CourseDates,
-    CourseMaterials,
-  }) {
+  constructor({ id, name, description, Training, dates, CourseMaterials }) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.training = Training;
-    this.dates = CourseDates
-      ? CourseDates.map((courseDate) => new CourseDateDTO(courseDate))
+    this.dates = dates
+      ? dates.map((courseDate) => new CourseDateDTO(courseDate))
       : [];
     this.materials = CourseMaterials
       ? CourseMaterials.map((courseMaterial) => new CourseMaterialDTO(author))
@@ -23,4 +15,16 @@ class CourseDTO {
   }
 }
 
-module.exports = { BookDTO };
+class CourseDateDTO {
+  constructor({ date, Teacher, MM_Course_Date_Student_Attendance }) {
+    this.date = date;
+    this.teacher = Teacher ? Teacher.User.firstName : null;
+    this.attendances = MM_Course_Date_Student_Attendance
+      ? MM_Course_Date_Student_Attendance.map(
+          (courseAttendance) => new CourseDateStudentDTO(courseAttendance)
+        )
+      : [];
+  }
+}
+
+module.exports = { CourseDTO };

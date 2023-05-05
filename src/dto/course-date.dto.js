@@ -1,15 +1,32 @@
-const { CourseAttendanceDTO } = require("./course-attendance.dto");
-
 class CourseDateDTO {
-  constructor({ id, Course, MM_Course_Attendance }) {
+  constructor({
+    id,
+    date,
+    Teacher,
+    Course,
+    MM_Course_Date_Student_Attendance,
+  }) {
     this.id = id;
+    this.date = date;
+    this.teacher = Teacher ? Teacher : null;
     this.course = Course ? Course : null;
-    this.courseAttendances = MM_Course_Attendance
-      ? MM_Course_Attendance.map(
-          (courseAttendance) => new CourseAttendanceDTO(courseAttendance)
+    this.attendances = MM_Course_Date_Student_Attendance
+      ? MM_Course_Date_Student_Attendance.map(
+          (courseAttendance) => new CourseDateStudentDTO(courseAttendance)
         )
       : [];
   }
 }
 
-module.exports = { CourseDateDTO };
+class CourseDateStudentDTO {
+  constructor({ id, CourseDate, Student, attendance }) {
+    this.courseDate = CourseDate ? CourseDate : null;
+    this.student = Student ? Student : null;
+    this.attendance = attendance ? attendance : null;
+  }
+}
+
+module.exports = {
+  CourseDateDTO,
+  CourseDateStudentDTO,
+};

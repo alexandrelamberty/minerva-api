@@ -1,4 +1,4 @@
-class TrainingCategoryDTO {
+class CategoryDTO {
   constructor({ id, name, description, Trainings }) {
     this.id = id;
     this.name = name;
@@ -7,4 +7,4 @@ class TrainingCategoryDTO {
   }
 }
 
-module.exports = { TrainingCategoryDTO };
+module.exports = { CategoryDTO };

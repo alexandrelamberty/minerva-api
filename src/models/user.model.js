@@ -65,11 +65,11 @@ module.exports = (sequelize) => {
       role: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "User",
+        defaultValue: "Student",
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [["User", "Admin"]],
+          isIn: [["Admin", "Moderator", "Teacher", "Student"]],
         },
       },
     },
