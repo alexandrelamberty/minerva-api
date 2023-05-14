@@ -55,10 +55,10 @@ const categoryController = {
     if (alreadyExists) {
       return res
         .status(409)
-        .json(new ErrorResponse("Le nom du genre existe déjà", 409));
+        .json(new ErrorResponse("The category name already exists!", 409));
     }
     const category = await categoryService.create(data);
-    res.location("/genre/" + category.id);
+    res.location("/categories/" + category.id);
     res.status(201).json(new SuccessResponse(category, 201));
   },
 
@@ -74,7 +74,7 @@ const categoryController = {
     if (alreadyExists) {
       return res
         .status(409)
-        .json(new ErrorResponse("The name of the Category already exist", 409));
+        .json(new ErrorResponse("The category name already exists!", 409));
     }
     const isUpdated = await categoryService.update(id, data);
     if (!isUpdated) {

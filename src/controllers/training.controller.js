@@ -14,8 +14,8 @@ const trainingController = {
    */
   search: async (req, res) => {
     const terms = req.params.terms;
-    const { books, count } = await trainingService.search(terms);
-    res.status(200).json(new SuccessArrayResponse(books, count));
+    const { trainings, count } = await trainingService.search(terms);
+    res.status(200).json(new SuccessArrayResponse(trainings, count));
   },
 
   /**
@@ -108,10 +108,8 @@ const trainingController = {
       res.status(404).json(new ErrorResponse("Album not found", 404));
       return;
     }
-    res.location = "/book/" + id;
-    res
-      .status(204)
-      .json(new SuccessResponse({ msg: "Cover modifiée avec succès" }, 204));
+    res.location = "/trainings/" + id;
+    res.status(204).json(new SuccessResponse({ msg: "Cover update " }, 204));
     //res.sendStatus(501)
   },
 };

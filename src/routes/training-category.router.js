@@ -5,7 +5,7 @@ const pagination = require("../middlewares/pagination.middleware");
 const {
   createCategoryValidator,
   updateCategoryValidator,
-} = require("../validators/category.validators");
+} = require("../validators/training-category.validators");
 
 const trainingCategoryRouter = require("express").Router();
 
@@ -13,7 +13,7 @@ trainingCategoryRouter
   .route("/")
   .get(pagination(), trainingCategoryController.getAll)
   .post(
-    // authJwt(["Admin", "User"]),
+    // authJwt(["Admin"]),
     bodyValidation(createCategoryValidator),
     trainingCategoryController.create
   );

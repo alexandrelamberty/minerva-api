@@ -4,7 +4,7 @@ const { UserDTO } = require("./user.dto");
 class TrainingDTO {
   constructor({
     id,
-    title,
+    name,
     description,
     startDate,
     endDate,
@@ -13,7 +13,7 @@ class TrainingDTO {
     Students,
   }) {
     this.id = id;
-    this.title = title;
+    this.name = name;
     this.description = description;
     this.startDate = startDate;
     this.endDate = endDate;

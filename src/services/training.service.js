@@ -7,7 +7,7 @@ const trainingService = {
   search: async (terms) => {
     const { rows, count } = await db.Training.findAndCountAll({
       where: {
-        title: {
+        name: {
           [Op.like]: `%${terms}%`,
         },
       },
@@ -20,7 +20,7 @@ const trainingService = {
     };
   },
 
-  getAll: async (offset, limit, genreId) => {
+  getAll: async (offset, limit) => {
     const { rows, count } = await db.Training.findAndCountAll({
       distinct: true,
       offset,

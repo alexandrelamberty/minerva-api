@@ -96,6 +96,23 @@ const courseController = {
     }
     res.sendStatus(204);
   },
+
+  /**
+   * Delete a Course
+   * @param {Request} req
+   * @param {Response} res
+   */
+  getDates: async (req, res) => {
+    const { id } = req.params;
+    const dates = await courseService.getDates(id);
+    res.status(201).json(new SuccessResponse(dates, 201));
+  },
+
+  getMaterials: async (req, res) => {
+    const { id } = req.params;
+    const dates = await courseService.getDates(id);
+    res.status(201).json(new SuccessResponse(dates, 201));
+  },
 };
 
 module.exports = courseController;

@@ -22,4 +22,9 @@ courseRouter
   .put(bodyValidation(updateCourseValidator), courseController.update)
   .delete(authJwt(["Admin"]), courseController.delete);
 
+courseRouter.route("/:id/dates").get(courseController.getDates);
+// .put(bodyValidation(updateCourseValidator), courseController.updateDates);
+
+courseRouter.route("/:id/materials").get(courseController.getDates);
+
 module.exports = courseRouter;
