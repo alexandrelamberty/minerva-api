@@ -12,6 +12,7 @@ app.use(
       "https://minerva.eevos.be",
       "https://minerva.netlify.app/",
       "http://localhost:4200",
+      "http://localhost:5173",
       "http://localhost",
     ],
   })

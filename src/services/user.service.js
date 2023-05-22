@@ -1,7 +1,23 @@
+const { Op } = require("sequelize");
 const { UserDTO } = require("../dto/user.dto");
 const db = require("../models");
 
 const userService = {
+  search: async (terms) => {
+    const { rows, count } = await db.User.findAndCountAll({
+      where: {
+        firstName: {
+          [Op.like]: `%${terms}%`,
+        },
+      },
+      distinct: true,
+    });
+    return {
+      users: rows.map((user) => new UserDTO(user)),
+      count,
+    };
+  },
+
   getAll: async (offset, limit) => {
     const { rows, count } = await db.User.findAndCountAll({
       distinct: true,
@@ -15,7 +31,9 @@ const userService = {
   },
 
   getById: async (id) => {
-    const user = await db.User.findByPk(id);
+    const user = await db.User.findByPk(id, {
+      // include:
+    });
     return user ? new UserDTO(user) : null;
   },
 

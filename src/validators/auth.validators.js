@@ -18,10 +18,9 @@ const loginValidator = yup.object({
   password: yup
     .string()
     .required()
-    .min(8, "Caractere minimum requis : 8")
     .matches(
       passwordRegex,
-      "Doit contenir 8 Caractere, Une majuscule et minuscule, et un nombre."
+      "The Password must contain at least 8 characters, one uppercase, one lowercase and a number."
     ),
 });
 

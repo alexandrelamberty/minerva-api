@@ -24,14 +24,19 @@ const courseService = {
       distinct: true,
       offset,
       limit,
-      // FIXME: move this logic the DTO
       include: [
+        db.Training,
+        {
+          model: db.Teacher,
+          // attributes: ["UserId"],
+          include: [{ model: db.User, attributes: ["firstName", "lastName"] }],
+        },
         {
           association: "dates",
           include: [
             {
               model: db.Teacher,
-              attributes: ["UserId"],
+              // attributes: ["UserId"],
               include: [
                 { model: db.User, attributes: ["firstName", "lastName"] },
               ],
@@ -48,18 +53,35 @@ const courseService = {
 
   getById: async (id) => {
     const course = await db.Course.findByPk(id, {
-      include: [db.Book],
+      include: [
+        db.Training,
+        {
+          model: db.Teacher,
+          include: [{ model: db.User, attributes: ["firstName", "lastName"] }],
+        },
+        {
+          association: "dates",
+          include: [
+            {
+              model: db.Teacher,
+              // attributes: ["UserId"],
+              include: [
+                { model: db.User, attributes: ["firstName", "lastName"] },
+              ],
+            },
+          ],
+        },
+      ],
     });
     return course ? new CourseDTO(course) : null;
   },
 
   create: async (courseToAdd) => {
-    // console.log("Create course: ", courseToAdd);
-
-    // Add everything in one go
-    const course = await db.Course.create(courseToAdd, {
-      include: [{ association: "dates", as: "dates" }],
-    });
+    console.log("Service Create course: ", courseToAdd);
+    const course = await db.Course.create(courseToAdd);
+    course.setTraining(courseToAdd.Training.id);
+    course.setTeacher(courseToAdd.Teacher.id);
+    console.log("Service course created", course);
 
     // console.log("Created course:", course);
 
@@ -84,7 +106,7 @@ const courseService = {
     // course.addCourseDate(courseDate);
     //
 
-    console.log(await course.countDates());
+    // console.log(await course.countDates());
     return course ? new CourseDTO(course) : null;
   },
 
@@ -94,21 +116,27 @@ const courseService = {
     console.log("DTO: ", courseDTO);
 
     const course = await db.Course.findByPk(id, {
-      include: [{ association: "dates", as: "dates" }],
+      include: [
+        // {
+        //   association: db.CourseDate,
+        //   as: "dates",
+        // },
+      ],
     });
 
     console.log("TO UPDATE: ", course);
 
     try {
-      // course.setCoursDates([])
-      course.setDates([]);
-
-      // for (const dates of courseDTO.dates) {
-      //   await course.addDates(
-      //     { TeacherId: dates.TeacherId, date: dates.date },
-      //     { transaction }
-      //   );
-      // }
+      for (const date of courseDTO.dates) {
+        await course.createDate(
+          {
+            TeacherId: date.TeacherId,
+            CourseId: date.CourseId,
+            date: date.date,
+          },
+          { transaction }
+        );
+      }
 
       const updatedRow = await db.Course.update(
         course,
@@ -116,7 +144,9 @@ const courseService = {
           where: { id },
         },
         {
-          include: [{ association: "dates", as: "dates" }],
+          include: [
+            { association: "dates", model: db.CourseDate, as: "dates" },
+          ],
         }
       );
       await transaction.commit();
@@ -132,6 +162,22 @@ const courseService = {
       where: { id },
     });
     return nbDeletedRow === 1;
+  },
+
+  getDates: async (id) => {
+    const course = await db.Course.findByPk(id, {
+      include: [{ association: "dates", as: "dates" }],
+    });
+    console.log(course);
+    return course.dates;
+  },
+
+  getMaterials: async (id) => {
+    const course = await db.Course.findByPk(id, {
+      include: [db.CourseMaterial],
+    });
+    console.log(course);
+    return course.dates;
   },
 };
 

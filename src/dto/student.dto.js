@@ -1,25 +1,39 @@
-const { CourseDateDTO } = require("./course-date.dto");
+const { CourseDateStudentDTO } = require("./course-date.dto");
 const { TrainingDTO } = require("./training.dto");
 
+class StudentTrainingDTO {
+  constructor({ id, name, description, cover, startDate, endDate }) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.cover = cover;
+    this.startDate = startDate;
+    this.endDate = endDate;
+  }
+}
+
 class StudentDTO {
-  constructor({
-    id,
-    firstName,
-    lastName,
-    username,
-    email,
-    identification,
-    Trainings,
-    CourseAttendances,
-  }) {
-    console.log("Student dto: ");
+  constructor({ id, identification, User, Trainings, CourseAttendances }) {
     this.id = id;
     this.identification = identification;
+    // User informations
+    this.firstName = User.firstName;
+    this.lastName = User.lastName;
+    this.email = User.email;
+    //
+    console.log("Trainings : ", Trainings);
     this.trainings = Trainings
-      ? Trainings.map((training) => new TrainingDTO(training))
+      ? Trainings.map((training) => {
+          console.log(training);
+          return new StudentTrainingDTO(training);
+          return { id: training.id, name: training.name };
+        })
       : [];
+
     this.attendances = CourseAttendances
-      ? CourseAttendances.map((attendances) => new CourseDateDTO(attendances))
+      ? CourseAttendances.map(
+          (attendances) => new CourseDateStudentDTO(attendances)
+        )
       : [];
   }
 }

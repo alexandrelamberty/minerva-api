@@ -1,65 +1,58 @@
 const { Request, Response } = require("express");
-const userService = require("../services/user.service");
+const teacherService = require("../services/teacher.service");
 const { ErrorResponse } = require("../utils/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
 } = require("../utils/success.response");
 
-const userController = {
+const teacherController = {
   /**
-   * Search Users
+   * Search teachers
    * @param {Request} req
    * @param {Response} res
    */
   search: async (req, res) => {
     const terms = req.params.terms;
-    const { users: users, count } = await userService.search(terms);
-    res.status(200).json(new SuccessArrayResponse(users, count));
+    const { teachers: teachers, count } = await teacherService.search(terms);
+    res.status(200).json(new SuccessArrayResponse(teachers, count));
   },
 
   /**
-   * Get All Users
+   * Get All Teachers
    * @param {Request} req
    * @param {Response} res
    */
   getAll: async (req, res) => {
     const { offset, limit } = req.pagination;
-    const { users, count } = await userService.getAll(offset, limit);
-    res.status(200).json(new SuccessArrayResponse(users, count));
+    const { teachers, count } = await teacherService.getAll(offset, limit);
+    res.status(200).json(new SuccessArrayResponse(teachers, count));
   },
 
   /**
-   * Get a User By Id
+   * Get a Teacher By Id
    * @param {Request} req
    * @param {Response} res
    */
   getById: async (req, res) => {
     const { id } = req.params;
-    // FIXME:
-    // const connectedUserRole = req.user.role;
-    // const connectedUserId = req.user.id;
-    // if (connectedUserRole !== "Admin" && connectedUserId !== parseInt(id)) {
-    //   res.status(403).json(new ErrorResponse("Forbidden Access", 403));
-    //   return;
-    // }
-    const user = await userService.getById(id);
-    if (!user) {
+    const teacher = await teacherService.getById(id);
+    if (!teacher) {
       res.sendStatus(404);
       return;
     }
-    res.status(200).json(new SuccessResponse(user));
+    res.status(200).json(new SuccessResponse(teacher));
   },
 
   /**
-   * Update a User
+   * Update a Teacher
    * @param {Request} req
    * @param {Response} res
    */
   update: async (req, res) => {
     const { id } = req.params;
     const data = req.body;
-    const updated = await userService.update(data, id);
+    const updated = await teacherService.update(data, id);
     if (!updated) {
       res.sendStatus(404);
       return;
@@ -68,13 +61,13 @@ const userController = {
   },
 
   /**
-   * Delete a User
+   * Delete a Teacher
    * @param {Request} req
    * @param {Response} res
    */
   delete: async (req, res) => {
     const { id } = req.params;
-    const deleted = await userService.delete(id);
+    const deleted = await teacherService.delete(id);
     if (!deleted) {
       res.sendStatus(404);
       return;
@@ -83,4 +76,4 @@ const userController = {
   },
 };
 
-module.exports = userController;
+module.exports = teacherController;

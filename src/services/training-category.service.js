@@ -25,9 +25,14 @@ const trainingCategoryService = {
       distinct: true,
       offset: offset,
       limit: limit,
-      include: [db.Training],
+      include: [
+        {
+          model: db.Training,
+          // attributes: ["id", "name"],
+        },
+      ],
     });
-    console.log(rows);
+
     return {
       categories: rows.map((category) => new CategoryDTO(category)),
       count,
@@ -58,6 +63,16 @@ const trainingCategoryService = {
       where: { id },
     });
     return nbDeletedRow === 1;
+  },
+
+  updateCover: async (id, filename) => {
+    const data = {
+      cover: `/images/covers/${filename}`,
+    };
+    const updatedRow = await db.Category.update(data, {
+      where: { id },
+    });
+    return updatedRow[0] === 1;
   },
 
   nameAlreadyExists: async (name) => {

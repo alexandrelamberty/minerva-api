@@ -1,5 +1,5 @@
 const { where, Op } = require("sequelize");
-const { TrainingDTO } = require("../dto/training.dto");
+const { TrainingDTO, TrainingDetailsDTO } = require("../dto/training.dto");
 const { Category, CourseMaterial, CourseDate } = require("../models");
 const db = require("../models");
 
@@ -7,7 +7,7 @@ const trainingService = {
   search: async (terms) => {
     const { rows, count } = await db.Training.findAndCountAll({
       where: {
-        title: {
+        name: {
           [Op.like]: `%${terms}%`,
         },
       },
@@ -20,36 +20,42 @@ const trainingService = {
     };
   },
 
-  getAll: async (offset, limit, genreId) => {
+  getAll: async (offset, limit) => {
     const { rows, count } = await db.Training.findAndCountAll({
       distinct: true,
       offset,
       limit,
-      include: [Category, db.Course],
+      include: [db.Category, { model: db.Student, include: [db.User] }],
     });
+    console.log("ROWS---", rows);
     return {
-      trainings: rows.map((training) => new TrainingDTO(training)),
+      trainings: rows.map((training) => new TrainingDetailsDTO(training)),
       count,
     };
   },
 
   getAllByCategoryId: async (id) => {
     const training = await db.Training.findAll(id, {
-      include: [Category],
+      include: [db.Category, { model: db.Student, include: [db.User] }],
     });
     return training ? new TrainingDTO(training) : null;
   },
 
   getById: async (id) => {
     const training = await db.Training.findByPk(id, {
-      include: [Category, db.Course],
+      include: [
+        db.Category,
+        db.Course,
+        { model: db.Student, include: [db.User] },
+      ],
     });
-    return training ? new TrainingDTO(training) : null;
+    return training ? new TrainingDetailsDTO(training) : null;
   },
 
   create: async (trainingToAdd) => {
     console.log(trainingToAdd);
     const training = await db.Training.create(trainingToAdd);
+    console.log(training);
     return training ? new TrainingDTO(training) : null;
   },
 
@@ -92,6 +98,21 @@ const trainingService = {
       where: { id },
     });
     return nbDeletedRow === 1;
+  },
+
+  updateCover: async (id, filename) => {
+    const data = {
+      cover: `/images/covers/${filename}`,
+    };
+    const updatedRow = await db.Training.update(data, {
+      where: { id },
+    });
+    return updatedRow[0] === 1;
+  },
+
+  nameAlreadyExists: async (name) => {
+    const training = await db.Training.findOne({ where: { name } });
+    return training ? true : false;
   },
 };
 
