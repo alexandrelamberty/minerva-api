@@ -1,21 +1,38 @@
-const { CourseAttendanceDTO } = require("./course-attendance.dto");
-const { TrainingDTO } = require("./training.dto");
+const { CourseDateStudentDTO } = require("./course-date.dto");
+const { CourseDTO } = require("./course.dto");
 
-class TeacherDTO extends UserDTO {
-  constructor({ id, identification, Courses, CourseAttendances }) {
-    console.log("Teacher dto: ", Orders);
+class TeacherDTO {
+  constructor({ id, company, User, Courses, CourseAttendances }) {
     this.id = id;
-    this.firstName = firstName;
+    this.company = company;
+    this.user = User;
     this.courses = Courses
       ? Courses.map((course) => new CourseDTO(course))
       : [];
     // Courses via trainings ?
     this.attendances = CourseAttendances
       ? CourseAttendances.map(
-          (attendances) => new CourseAttendanceDTO(attendances)
+          (attendances) => new CourseDateStudentDTO(attendances)
         )
       : [];
   }
 }
 
-module.exports = { TeacherDTO };
+class TeacherDetailDTO {
+  constructor({ id, company, User, Courses, CourseAttendances }) {
+    this.id = id;
+    this.company = company;
+    this.user = User;
+    this.courses = Courses
+      ? Courses.map((course) => new CourseDTO(course))
+      : [];
+    // Courses via trainings ?
+    this.attendances = CourseAttendances
+      ? CourseAttendances.map(
+          (attendances) => new CourseDateStudentDTO(attendances)
+        )
+      : [];
+  }
+}
+
+module.exports = { TeacherDTO, TeacherDetailDTO };

@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
     "Training",
     {
       name: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(45),
         allowNull: false,
         validate: {
           notNull: true,
@@ -18,10 +18,18 @@ module.exports = (sequelize) => {
         },
       },
       description: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(500),
         allowNull: false,
         validate: {
           notNull: true,
+          notEmpty: true,
+        },
+      },
+      cover: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        validate: {
+          len: [24, 255],
           notEmpty: true,
         },
       },

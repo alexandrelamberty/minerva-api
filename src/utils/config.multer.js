@@ -9,7 +9,7 @@ const config = (folder) => {
     filename: (req, file, callback) => {
       console.log("multer file : ", file);
       const name = uuid.v4();
-      const ext = file.originalname.split(".").at(-1); //Ma.Super.Cover.jpg
+      const ext = file.originalname.split(".").at(-1);
       callback(null, name + "." + ext);
     },
   }));

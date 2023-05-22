@@ -25,43 +25,44 @@ db.User = require("./user.model")(sequelize);
 
 // Relations
 
+// Training Category
+db.Category.hasMany(db.Training);
+
 // Training
 db.Training.belongsTo(db.Category);
 db.Training.belongsToMany(db.Student, { through: "MM_Student_Training" });
 db.Training.hasMany(db.Course);
 
-// Training Category
-db.Category.hasMany(db.Training);
-
 // Course
 db.Course.belongsTo(db.Training);
-db.Course.belongsToMany(db.Teacher, { through: "MM_Teacher_Course" });
-db.Course.hasMany(db.CourseMaterial);
+// db.Course.belongsToMany(db.Teacher, { through: "MM_Teacher_Course" });
+db.Course.belongsTo(db.Teacher);
 db.Course.hasMany(db.CourseDate, { as: "dates" });
+db.Course.hasMany(db.CourseMaterial);
 
 // Course Material
 db.CourseMaterial.belongsTo(db.Course);
 
 // Course Date
 db.CourseDate.belongsTo(db.Course);
+db.CourseDate.belongsTo(db.Teacher);
 db.CourseDate.belongsToMany(db.Student, {
   through: db.CourseDateAttendance,
   foreignKey: "CourseDateId",
 });
-db.CourseDate.belongsTo(db.Teacher);
 
 // Student
+db.Student.belongsTo(db.User);
 db.Student.belongsToMany(db.Training, { through: "MM_Student_Training" });
 db.Student.belongsToMany(db.CourseDate, {
   through: db.CourseDateAttendance,
   foreignKey: "StudentId",
 });
-db.Student.belongsTo(db.User);
 
 // Teacher
-db.Teacher.belongsToMany(db.Course, { through: "MM_Teacher_Course" });
-db.Teacher.hasMany(db.CourseDate);
 db.Teacher.belongsTo(db.User);
+db.Teacher.hasMany(db.Course);
+db.Teacher.hasMany(db.CourseDate);
 
 // User
 db.User.hasOne(db.Teacher);

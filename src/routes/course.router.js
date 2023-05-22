@@ -9,19 +9,35 @@ const {
 
 const courseRouter = require("express").Router();
 
+/**
+ * Search courses
+ */
 courseRouter.route("/search/:terms").get(courseController.search);
 
+/**
+ * Get all courses with pagination
+ * Create a new course
+ */
 courseRouter
   .route("/")
   .get(pagination(), courseController.getAll)
   .post(bodyValidation(createCourseValidator), courseController.create);
 
+/**
+ * Read, update and delete courses
+ */
 courseRouter
   .route("/:id")
   .get(courseController.getById)
   .put(bodyValidation(updateCourseValidator), courseController.update)
-  .delete(authJwt(["Admin"]), courseController.delete);
+  .delete(
+    // authJwt(["Admin"]),
+    courseController.delete
+  );
 
+/**
+ * Read, update and delete courses dates
+ */
 courseRouter.route("/:id/dates").get(courseController.getDates);
 // .put(bodyValidation(updateCourseValidator), courseController.updateDates);
 

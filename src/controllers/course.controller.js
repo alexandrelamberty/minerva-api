@@ -58,7 +58,7 @@ const courseController = {
    * @param {Response} res
    */
   create: async (req, res) => {
-    console.log("CREATE Course CONTROLLER");
+    console.log("Controller Create Course: ", req.body);
     const data = req.body;
     const course = await courseService.create(data);
     res.location("/courses/" + course.id);

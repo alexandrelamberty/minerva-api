@@ -28,6 +28,14 @@ module.exports = (sequelize) => {
           notEmpty: true,
         },
       },
+      cover: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        validate: {
+          len: [24, 255],
+          notEmpty: true,
+        },
+      },
     },
     {
       tableName: "training_category",

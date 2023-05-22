@@ -5,6 +5,7 @@ const {
   SuccessArrayResponse,
   SuccessResponse,
 } = require("../utils/success.response");
+const { deleteCover } = require("../utils/cover.fs");
 
 const trainingController = {
   /**
@@ -57,7 +58,19 @@ const trainingController = {
    */
   create: async (req, res) => {
     const data = req.body;
+
+    // Check if the training name is unique
+    // const alreadyExists = await trainingService.nameAlreadyExists(data.name);
+    // if (alreadyExists) {
+    //   return res
+    //     .status(409)
+    //     .json(new ErrorResponse("The training name already exists!", 409));
+    // }
+
+    // Create the training
     const training = await trainingService.create(data);
+
+    // Success Response
     res.location("/trainings/" + training.id);
     res.status(201).json(new SuccessResponse(training, 201));
   },
@@ -70,47 +83,114 @@ const trainingController = {
   update: async (req, res) => {
     const { id } = req.params;
     const data = req.body;
+
+    const alreadyExists = await trainingService.nameAlreadyExists(data.name);
+    if (alreadyExists) {
+      return res
+        .status(409)
+        .json(new ErrorResponse("The training name already exists!", 409));
+    }
+
     const updated = await trainingService.update(id, data);
     if (!updated) {
       res.sendStatus(404);
       return;
     }
-    res.location = "/book/" + id;
+
+    // Success Response
+    res.location = "/trainings/" + id;
     res.sendStatus(204);
   },
 
   /**
-   * Delete a Training
+   * Delete a Training and his associated cover file.
    * @param {Request} req
    * @param {Response} res
    */
   delete: async (req, res) => {
     const { id } = req.params;
+
+    const training = await trainingService.getById(id);
+    if (!training) {
+      res.status(404).json(new ErrorResponse("Training not found", 404));
+      return;
+    }
+
+    // Retrieve the training cover
+    const cover = training.cover;
+
     const deleted = await trainingService.delete(id);
     if (!deleted) {
       res.sendStatus(404);
       return;
+    } else {
+      deleteCover(cover);
     }
+
+    // Success Response
     res.sendStatus(204);
   },
 
   /**
-   * Update a Training cover
+   * Update a Training Cover
+   * @param {Request} req
+   * @param {Response} res
+   */
+  postCover: async (req, res) => {
+    const { id } = req.params;
+    const filename = req.file ? req.file.filename : null;
+
+    const isUpdated = await trainingService.updateCover(id, filename);
+    if (!isUpdated) {
+      res.status(404).json(new ErrorResponse("Training not found", 404));
+      return;
+    }
+
+    // Success Response
+    res
+      .status(204)
+      .json(
+        new SuccessResponse(
+          { msg: "Post cover success", filename: filename },
+          204
+        )
+      );
+  },
+
+  /**
+   * Update a Training Cover
    * @param {Request} req
    * @param {Response} res
    */
   updateCover: async (req, res) => {
     const { id } = req.params;
-    console.log("controller file : ", req.file);
-    const filename = req.file.filename;
-    const isUpdated = await trainingService.updateCover(id, filename);
-    if (!isUpdated) {
-      res.status(404).json(new ErrorResponse("Album not found", 404));
+    const filename = req.file ? req.file.filename : null;
+
+    const training = await trainingService.getById(id);
+    if (!training) {
+      res.status(404).json(new ErrorResponse("Training not found", 404));
       return;
     }
-    res.location = "/trainings/" + id;
-    res.status(204).json(new SuccessResponse({ msg: "Cover update " }, 204));
-    //res.sendStatus(501)
+
+    // Delete old cover
+    const cover = training.cover;
+    deleteCover(cover);
+
+    const isUpdated = await trainingService.updateCover(id, filename);
+    if (!isUpdated) {
+      res.status(404).json(new ErrorResponse("Training not found", 404));
+      return;
+    }
+
+    // Success Response
+    res
+      .status(204)
+      .json(
+        new SuccessResponse(
+          { msg: "Update cover success", filename: filename },
+          204
+        )
+      );
   },
 };
 

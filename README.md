@@ -97,3 +97,4 @@ docker push alexandrelamberty/minerva-api:tag
 - <https://developers.google.com/books/docs/viewer/developers_guide>
 - <https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58>
 - <https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58>
+- <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status>
