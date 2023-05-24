@@ -9,7 +9,10 @@ const hashPassword = (pwd) => {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return await queryInterface.bulkInsert("User", [
+    return await queryInterface.bulkInsert("user", [
+      /**
+       * Admins
+       */
       {
         firstName: "John",
         lastName: "Doe",
@@ -28,12 +31,15 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      /**
+       * Teachers
+       */
       {
         firstName: "Tina",
         lastName: "Harper",
         email: "tina.harper@example.com",
-        password: hashPassword("4demo@User"),
-        role: "User",
+        password: hashPassword("4demo@Teacher"),
+        role: "Teacher",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -41,8 +47,29 @@ module.exports = {
         firstName: "Dora",
         lastName: "Ray",
         email: "dora.ray@example.com",
-        password: hashPassword("4demo@User"),
-        role: "User",
+        password: hashPassword("4demo@Teacher"),
+        role: "Teacher",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      /**
+       * Students
+       */
+      {
+        firstName: "Jim",
+        lastName: "Aversky",
+        email: "jim.aversky@example.com",
+        password: hashPassword("4demo@Student"),
+        role: "Student",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        firstName: "Daniel",
+        lastName: "Tor",
+        email: "daniel.tor@example.com",
+        password: hashPassword("4demo@Student"),
+        role: "Student",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -50,6 +77,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("User", null, {});
+    return queryInterface.bulkDelete("user", null, {});
   },
 };

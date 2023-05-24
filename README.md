@@ -51,6 +51,12 @@ npm run migrate:undo
 
 ### Seeds
 
+Create seed
+
+```shell
+npx sequelize-cli seed:generate --name demo-user
+```
+
 Running the seeds
 
 ```shell

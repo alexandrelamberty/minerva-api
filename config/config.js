@@ -1,9 +1,9 @@
 module.exports = {
   development: {
-    username: "root",
-    password: "password",
-    database: "bookstore",
-    host: "127.0.0.1",
+    username: "minerva",
+    password: "minerva",
+    database: "minerva",
+    host: "localhost",
     port: 3306,
     dialect: "mysql",
     dialectOptions: {
@@ -11,9 +11,9 @@ module.exports = {
     },
   },
   test: {
-    username: "root",
-    password: "password",
-    database: "bookstore",
+    username: "minerva",
+    password: "minerva",
+    database: "minerva",
     host: "127.0.0.1",
     port: 3306,
     dialect: "mysql",

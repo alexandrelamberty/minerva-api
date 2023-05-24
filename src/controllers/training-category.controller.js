@@ -126,6 +126,7 @@ const categoryController = {
    * @param {Response} res
    */
   postCover: async (req, res) => {
+    console.log("postCover");
     const { id } = req.params;
     const filename = req.file ? req.file.filename : null;
 
@@ -134,12 +135,15 @@ const categoryController = {
       res.status(404).json(new ErrorResponse("Category not found", 404));
       return;
     }
+
+    console.log("filename: ", filename);
+
     res
-      .status(204)
+      .status(201)
       .json(
         new SuccessResponse(
           { msg: "Post cover success", filename: filename },
-          204
+          201
         )
       );
   },
@@ -168,11 +172,11 @@ const categoryController = {
       return;
     }
     res
-      .status(204)
+      .status(201)
       .json(
         new SuccessResponse(
           { msg: "Update cover success", filename: filename },
-          204
+          201
         )
       );
   },

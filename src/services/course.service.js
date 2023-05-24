@@ -29,7 +29,12 @@ const courseService = {
         {
           model: db.Teacher,
           // attributes: ["UserId"],
-          include: [{ model: db.User, attributes: ["firstName", "lastName"] }],
+          include: [
+            {
+              model: db.User,
+              attributes: ["firstName", "lastName"],
+            },
+          ],
         },
         {
           association: "dates",
@@ -57,7 +62,12 @@ const courseService = {
         db.Training,
         {
           model: db.Teacher,
-          include: [{ model: db.User, attributes: ["firstName", "lastName"] }],
+          include: [
+            {
+              model: db.User,
+              attributes: ["firstName", "lastName"],
+            },
+          ],
         },
         {
           association: "dates",
@@ -79,35 +89,43 @@ const courseService = {
   create: async (courseToAdd) => {
     console.log("Service Create course: ", courseToAdd);
     const course = await db.Course.create(courseToAdd);
-    course.setTraining(courseToAdd.Training.id);
-    course.setTeacher(courseToAdd.Teacher.id);
+    await course.setTraining(courseToAdd.Training.id);
+    await course.setTeacher(courseToAdd.Teacher.id);
+
     console.log("Service course created", course);
 
-    // console.log("Created course:", course);
-
-    // Creating with loop
-    // for (const courseDate of courseToAdd.dates) {
-    //   console.log(courseDate);
-    //   await course.addCourseDate({
-    //     TeacherId: courseDate.TeacherId,
-    //     // CourseId: course.id,
-    //     date: courseDate.date,
-    //   });
-    // }
-
-    // course.addCourseDates(courseToAdd.dates);
-
-    // Creating directly the CourseDate ! Bad
-    // const courseDate = await db.CourseDate.create({
-    //   TeacherId: 1,
-    //   CourseId: course.id,
-    //   date: "2023-05-05",
-    // });
-    // course.addCourseDate(courseDate);
-    //
-
     // console.log(await course.countDates());
-    return course ? new CourseDTO(course) : null;
+    const newCourse = await db.Course.findByPk(course.id, {
+      include: [
+        db.Training,
+        {
+          model: db.Teacher,
+          include: [
+            {
+              model: db.User,
+              attributes: ["firstName", "lastName"],
+            },
+          ],
+        },
+        {
+          association: "dates",
+          include: [
+            {
+              model: db.Teacher,
+              // attributes: ["UserId"],
+              include: [
+                {
+                  model: db.User,
+                  attributes: ["firstName", "lastName"],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    console.log("create course find: ", newCourse);
+    return newCourse ? new CourseDTO(newCourse) : null;
   },
 
   update: async (id, courseDTO) => {
