@@ -139,7 +139,7 @@ const trainingController = {
   postCover: async (req, res) => {
     const { id } = req.params;
     const filename = req.file ? req.file.filename : null;
-
+    console.log("Post cover: ", id, filename);
     const isUpdated = await trainingService.updateCover(id, filename);
     if (!isUpdated) {
       res.status(404).json(new ErrorResponse("Training not found", 404));
@@ -148,11 +148,11 @@ const trainingController = {
 
     // Success Response
     res
-      .status(204)
+      .status(201)
       .json(
         new SuccessResponse(
           { msg: "Post cover success", filename: filename },
-          204
+          201
         )
       );
   },
@@ -184,11 +184,11 @@ const trainingController = {
 
     // Success Response
     res
-      .status(204)
+      .status(201)
       .json(
         new SuccessResponse(
           { msg: "Update cover success", filename: filename },
-          204
+          201
         )
       );
   },

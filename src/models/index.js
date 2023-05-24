@@ -21,6 +21,7 @@ db.CourseDate = require("./course-date.model")(sequelize);
 db.CourseDateAttendance = require("./course-date-attendance.model")(sequelize);
 db.Teacher = require("./teacher.model")(sequelize);
 db.Student = require("./student.model")(sequelize);
+db.Enrollment = require("./enrollment.model")(sequelize);
 db.User = require("./user.model")(sequelize);
 
 // Relations
@@ -32,6 +33,7 @@ db.Category.hasMany(db.Training);
 db.Training.belongsTo(db.Category);
 db.Training.belongsToMany(db.Student, { through: "MM_Student_Training" });
 db.Training.hasMany(db.Course);
+db.Training.hasMany(db.Enrollment);
 
 // Course
 db.Course.belongsTo(db.Training);
@@ -53,11 +55,16 @@ db.CourseDate.belongsToMany(db.Student, {
 
 // Student
 db.Student.belongsTo(db.User);
+db.Student.hasMany(db.Enrollment);
 db.Student.belongsToMany(db.Training, { through: "MM_Student_Training" });
 db.Student.belongsToMany(db.CourseDate, {
   through: db.CourseDateAttendance,
   foreignKey: "StudentId",
 });
+
+// Enrollment
+db.Enrollment.belongsTo(db.Student);
+db.Enrollment.belongsTo(db.Training);
 
 // Teacher
 db.Teacher.belongsTo(db.User);

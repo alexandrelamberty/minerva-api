@@ -37,7 +37,10 @@ const teacherService = {
 
   getById: async (id) => {
     const teacher = await db.Teacher.findByPk(id, {
-      // include:
+      include: [
+        { model: db.User, attributes: ["firstName", "lastName", "email"] },
+        { model: db.Course, attributes: ["name"] },
+      ],
     });
     return teacher ? new TeacherDTO(teacher) : null;
   },

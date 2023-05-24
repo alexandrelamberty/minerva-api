@@ -135,11 +135,11 @@ const categoryController = {
       return;
     }
     res
-      .status(204)
+      .status(201)
       .json(
         new SuccessResponse(
           { msg: "Post cover success", filename: filename },
-          204
+          201
         )
       );
   },
@@ -168,11 +168,11 @@ const categoryController = {
       return;
     }
     res
-      .status(204)
+      .status(201)
       .json(
         new SuccessResponse(
           { msg: "Update cover success", filename: filename },
-          204
+          201
         )
       );
   },

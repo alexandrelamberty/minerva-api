@@ -7,7 +7,14 @@ class TeacherDTO {
     this.company = company;
     this.user = User;
     this.courses = Courses
-      ? Courses.map((course) => new CourseDTO(course))
+      ? Courses.map((course) => {
+          console.log(course);
+          return {
+            id: course.id,
+            name: course.name,
+          };
+          // return new CourseDTO(course);
+        })
       : [];
     // Courses via trainings ?
     this.attendances = CourseAttendances

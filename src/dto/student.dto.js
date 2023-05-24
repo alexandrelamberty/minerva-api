@@ -16,12 +16,12 @@ class StudentDTO {
   constructor({ id, identification, User, Trainings, CourseAttendances }) {
     this.id = id;
     this.identification = identification;
-    // User informations
     this.firstName = User.firstName;
     this.lastName = User.lastName;
     this.email = User.email;
+    this.avatar = User.avatar;
     //
-    console.log("Trainings : ", Trainings);
+    console.log("StudentDTO Trainings : ", Trainings);
     this.trainings = Trainings
       ? Trainings.map((training) => {
           console.log(training);
