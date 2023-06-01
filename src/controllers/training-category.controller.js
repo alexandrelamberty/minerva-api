@@ -162,9 +162,9 @@ const categoryController = {
       res.status(404).json(new ErrorResponse("Category not found", 404));
       return;
     }
-    // Delete old cover
-    const cover = category.cover;
-    deleteCover(cover);
+    // If the category has already a cover delete the old one.
+    // FIXME: must be different than the property passed from the form Delete old cover
+    if (category.cover) deleteCover(cover);
 
     const isUpdated = await categoryService.updateCover(id, filename);
     if (!isUpdated) {

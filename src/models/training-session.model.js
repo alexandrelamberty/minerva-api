@@ -6,8 +6,8 @@ const { Sequelize, ModelStatic, DataTypes } = require("sequelize");
  * @returns {ModelStatic<any>}
  */
 module.exports = (sequelize) => {
-  const Training = sequelize.define(
-    "Training",
+  const TrainingSession = sequelize.define(
+    "TrainingSession",
     {
       name: {
         type: DataTypes.STRING(45),
@@ -25,29 +25,20 @@ module.exports = (sequelize) => {
           notEmpty: true,
         },
       },
-      cover: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      // TODO: remove, moved to TrainingSession model
       startDate: {
         type: DataTypes.DATE(),
         allowNull: false,
       },
-      // TODO: remove, moved to TrainingSession model
       endDate: {
         type: DataTypes.DATE(),
         allowNull: false,
       },
     },
     {
-      tableName: "training",
+      tableName: "training_session",
       timestamps: true,
     }
   );
 
-  return Training;
+  return TrainingSession;
 };
