@@ -31,7 +31,10 @@ const studentService = {
         {
           model: db.Training,
         },
-        { model: db.User, attributes: ["firstName", "lastName", "email"] },
+        {
+          model: db.User,
+          attributes: ["firstName", "lastName", "email", "avatar"],
+        },
       ],
     });
     return {
@@ -42,7 +45,12 @@ const studentService = {
 
   getById: async (id) => {
     const student = await db.Student.findByPk(id, {
-      // include:
+      include: [
+        {
+          model: db.User,
+          attributes: ["firstName", "lastName", "email", "avatar"],
+        },
+      ],
     });
     return student ? new StudentDTO(student) : null;
   },

@@ -6,12 +6,14 @@ const categoryRouter = require("./training-category.router");
 const homeRouter = require("./home.router");
 const studentRouter = require("./student.router");
 const teacherRouter = require("./teacher.router");
+const enrollmentRouter = require("./enrollment.router");
 
 const router = require("express").Router();
 router.use("/", homeRouter);
 router.use("/auth", authRouter);
 router.use("/users", userRouter);
 router.use("/students", studentRouter);
+router.use("/enrollments", enrollmentRouter);
 router.use("/teachers", teacherRouter);
 router.use("/categories", categoryRouter);
 router.use("/trainings", trainingRouter);

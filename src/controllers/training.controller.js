@@ -141,7 +141,7 @@ const trainingController = {
     console.log("postCover");
     const { id } = req.params;
     const filename = req.file ? req.file.filename : null;
-
+    console.log("Post cover: ", id, filename);
     const isUpdated = await trainingService.updateCover(id, filename);
     if (!isUpdated) {
       res.status(404).json(new ErrorResponse("Training not found", 404));

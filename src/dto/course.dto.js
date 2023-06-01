@@ -1,4 +1,5 @@
 const { CourseMaterialDTO } = require("./course-material.dto");
+const { TeacherDTO } = require("./teacher.dto");
 
 class CourseDetailsDTO {
   constructor({
@@ -43,7 +44,7 @@ class CourseDTO {
     this.description = description;
     this.cover = cover;
     this.training = Training;
-    this.teacher = Teacher;
+    this.teacher = Teacher ? new TeacherDTO(Teacher) : null;
     this.dates = dates
       ? dates.map((courseDate) => {
           console.log(courseDate);
