@@ -13,20 +13,20 @@ module.exports = (sequelize) => {
   const CourseDateAttendance = sequelize.define(
     "CourseDateAttendance",
     {
-      StudentId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: db.Student,
-          key: "id",
-        },
-      },
-      CourseDateId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: db.CourseDate,
-          key: "id",
-        },
-      },
+      // StudentId: {
+      //   type: DataTypes.INTEGER,
+      //   references: {
+      //     model: db.Student,
+      //     key: "id",
+      //   },
+      // },
+      // CourseDateId: {
+      //   type: DataTypes.INTEGER,
+      //   references: {
+      //     model: db.CourseDate,
+      //     key: "id",
+      //   },
+      // },
       attendance: {
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -1,32 +1,51 @@
-const trainingController = require("../controllers/training.controller");
+const categoryController = require("../controllers/training-category.controller");
 const authJwt = require("../middlewares/auth.jwt.middleware");
 const bodyValidation = require("../middlewares/body.validator");
 const pagination = require("../middlewares/pagination.middleware");
 const trainingValidator = require("../validators/training.validators");
-const trainingRouter = require("express").Router();
+const categoryRouter = require("express").Router();
 
-trainingRouter.route("/search/:terms").get(trainingController.search);
+categoryRouter.route("/search/:terms").get(categoryController.search);
 
-trainingRouter
+categoryRouter
   .route("/")
   .get(
     pagination({ defaultLimit: 30, maxLimit: 200 }),
-    trainingController.getAll
+    categoryController.getAll
   )
   .post(
     // authJwt(["Admin"]),
     bodyValidation(trainingValidator),
-    trainingController.create
+    categoryController.create
   );
 
-trainingRouter
+categoryRouter
   .route("/:id")
-  .get(trainingController.getById)
-  .put(
+  .get(categoryController.getById)
+  .patch(
     // authJwt(["Admin"]),
     bodyValidation(trainingValidator),
-    trainingController.update
+    categoryController.update
   )
-  .delete(/*authJwt(["Admin"]),*/ trainingController.delete);
+  .delete(/*authJwt(["Admin"]),*/ categoryController.delete);
 
-module.exports = trainingRouter;
+/**
+ * Post / Update a Training Cover
+ */
+categoryRouter
+  .route("/:id/cover")
+  .post(
+    // authJwt(["Admin"]),
+    upload.single("cover"),
+    // bodyValidation(updateCategoryValidator),
+    categoryController.postCover
+  )
+  .put(
+    // authJwt(["Admin"]),
+    upload.single("cover"),
+    // bodyValidation(updateCategoryValidator),
+    categoryController.updateCover
+  )
+  .delete(/*authJwt(["Admin"]), */ categoryController.delete);
+
+module.exports = categoryRouter;

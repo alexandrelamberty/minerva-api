@@ -30,7 +30,6 @@ const updateTrainingValidator = yup.object({
         id: yup.number().integer().positive().required(),
       })
     )
-    .required()
     .min(1),
 });
 

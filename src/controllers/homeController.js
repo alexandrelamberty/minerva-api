@@ -9,7 +9,7 @@ const homeController = {
    * @param { Response} res
    */
   home: async (req, res) => {
-    res.status(200).json("Epidemic Escapes - Bookstore API");
+    res.status(200).json("Minerva - Training Management System API");
   },
 };
 
