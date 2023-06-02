@@ -20,10 +20,9 @@ module.exports = (sequelize) => {
         },
       },
       description: {
-        type: DataTypes.STRING(500),
+        type: DataTypes.TEXT("long"),
         allowNull: false,
         validate: {
-          len: [1, 500],
           notNull: true,
           notEmpty: true,
         },

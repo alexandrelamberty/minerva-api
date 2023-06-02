@@ -7,6 +7,7 @@ const homeRouter = require("./home.router");
 const studentRouter = require("./student.router");
 const teacherRouter = require("./teacher.router");
 const enrollmentRouter = require("./enrollment.router");
+const openaiRouter = require("./openai.router");
 
 const router = require("express").Router();
 router.use("/", homeRouter);
@@ -18,5 +19,6 @@ router.use("/teachers", teacherRouter);
 router.use("/categories", categoryRouter);
 router.use("/trainings", trainingRouter);
 router.use("/courses", courseRouter);
+router.use("/ai", openaiRouter);
 
 module.exports = router;

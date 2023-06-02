@@ -15,7 +15,6 @@ To change the database see <https://sequelize.org/docs/v6/getting-started/> for 
 Create an `.env` file and add the following environment variables and fill accordingly with the database configuration. The rest of the configuration work as it is in development.
 
 ```properties
-NODE_ENV=development
 API_PORT=3000
 DB_SERVER=localhost
 DB_ROOT_PASSWORD=localhost
@@ -27,6 +26,7 @@ JWT_SECRET=d7a481461577ba4c3c4c6946cca7204b
 JWT_EXPIRE=1d
 JWT_ISSUER=minerva
 JWT_AUDIENCE=web-minerva
+OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
 ```
 
 Start the application in watch mode
