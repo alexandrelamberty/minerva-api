@@ -1,5 +1,4 @@
 const { CourseDateStudentDTO } = require("./course-date.dto");
-const { TrainingDTO } = require("./training.dto");
 
 class StudentTrainingDTO {
   constructor({ id, name, description, cover, startDate, endDate }) {

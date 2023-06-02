@@ -41,7 +41,7 @@ trainingCategoryRouter
 trainingCategoryRouter
   .route("/:id")
   .get(trainingCategoryController.getById)
-  .put(
+  .patch(
     // authJwt(["Admin"]),
     bodyValidation(updateCategoryValidator),
     trainingCategoryController.update

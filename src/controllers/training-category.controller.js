@@ -75,15 +75,9 @@ const categoryController = {
   update: async (req, res) => {
     const { id } = req.params;
     const data = req.body;
-
-    const alreadyExists = await categoryService.nameAlreadyExists(data.name);
-    if (alreadyExists) {
-      return res
-        .status(409)
-        .json(new ErrorResponse("The category name already exists!", 409));
-    }
-
+    console.log(id, data);
     const isUpdated = await categoryService.update(id, data);
+    console.log("isUpdated ", isUpdated);
     if (!isUpdated) {
       res.sendStatus(404);
       return;
@@ -156,7 +150,7 @@ const categoryController = {
   updateCover: async (req, res) => {
     const { id } = req.params;
     const filename = req.file ? req.file.filename : null;
-
+    console.log("UpdateCover", id, filename);
     const category = await categoryService.getById(id);
     if (!category) {
       res.status(404).json(new ErrorResponse("Category not found", 404));
