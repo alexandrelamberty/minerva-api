@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
     "Course",
     {
       name: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: true,
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
         },
       },
       description: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           notEmpty: true,
