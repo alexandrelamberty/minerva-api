@@ -1,7 +1,10 @@
 const jsonwebtoken = require("jsonwebtoken");
 
 const { JWT_SECRET, JWT_AUDIENCE, JWT_ISSUER, JWT_EXPIRE } = process.env;
-
+/**
+ * JWT helpers
+ * https://www.npmjs.com/package/jsonwebtoken
+ */
 const jwt = {
   generate: ({ id, role }) => {
     return new Promise((resolve, reject) => {

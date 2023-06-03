@@ -1,3 +1,8 @@
+// FIXME: Response by ressource ?
+
+/**
+ * Success Response for single object
+ */
 class SuccessResponse {
   constructor(data, code = 200) {
     this.result = data;
@@ -5,6 +10,9 @@ class SuccessResponse {
   }
 }
 
+/**
+ * Success Response for list object
+ */
 class SuccessArrayResponse {
   constructor(data, count, code = 200) {
     this.results = data;

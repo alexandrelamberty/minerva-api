@@ -1,7 +1,10 @@
 const { CourseDateDTO } = require("../dto/course-date.dto");
 const { OrderDTO } = require("../dto/order.dto");
 const db = require("../models");
-
+/**
+ *
+ * See {@link CourseDate}
+ */
 const courseDate = {
   getAll: async (offset, limit) => {
     const { rows, count } = await db.CourseDate.findAndCountAll({
