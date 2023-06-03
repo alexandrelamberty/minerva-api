@@ -1,11 +1,23 @@
 [![Node build](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml)
 [![Node Docker DockerHub](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml)
 
-# Minerva API
+# Minerva - Training Management System API
+
+The Training Management System API is a powerful tool designed to streamline and automate the process of managing training programs within an organization. It provides a comprehensive set of endpoints that allow developers to integrate and interact with the Training Management System seamlessly.
+
+## Key Features
+
+- **User Management**: Easily manage user profiles, including creation, modification, and authentication, ensuring secure access to the system.
+- **Training Management**: Efficiently create, update, and retrieve training information, including descriptions, category, courses, trainer.
+- **Course Management**: Efficiently create, update, and retrieve course information, including descriptions, schedules, trainer.
+- **Enrollment**: Enable users to enroll in specific courses, track their progress, and receive notifications for upcoming sessions.
+- **Progress Tracking**: Keep tabs on individual learner progress, track completion rates, and generate insightful reports on training performance.
+- **Notifications**: Automate communication with users by sending notifications about course updates, enrollment confirmations, and upcoming sessions.
+- **Permissions and Roles**: Assign different access levels and roles to users, enabling fine-grained control over the system's functionality.
 
 ## Usage
 
-This API is part of a Docker stack. See the [Minerva](https://github.com/alexandrelamberty/minerva) project.
+> This API is part of the [Minerva](https://github.com/alexandrelamberty/minerva) project.
 
 ## Development
 

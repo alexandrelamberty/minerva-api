@@ -1,7 +1,7 @@
 {
-  "name": "expressapimusic",
-  "version": "0.1.0",
-  "description": "fil rouge api music",
+  "name": "minerva-api",
+  "version": "0.0.1-alpha",
+  "description": "The Training Management System API is a powerful tool designed to streamline and automate the process of managing training programs within an organization.",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
@@ -14,8 +14,8 @@
     "docker:build": "docker build . -t alexandrelamberty/bookstore-api:master",
     "docker:push": "docker push alexandrelamberty/bookstore-api:master"
   },
-  "author": "Aude",
-  "license": "ISC",
+  "author": "Alexandre Lamberty <mail@alexandrelamberty.com>",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.20"
   },
