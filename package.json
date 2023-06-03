@@ -12,11 +12,13 @@
     "seed:all": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo:all",
     "docker:build": "docker build . -t alexandrelamberty/bookstore-api:master",
-    "docker:push": "docker push alexandrelamberty/bookstore-api:master"
+    "docker:push": "docker push alexandrelamberty/bookstore-api:master",
+    "doc": "./node_modules/.bin/jsdoc -r ./src/"
   },
   "author": "Alexandre Lamberty <mail@alexandrelamberty.com>",
   "license": "MIT",
   "devDependencies": {
+    "jsdoc": "^4.0.2",
     "nodemon": "^2.0.20"
   },
   "dependencies": {

@@ -1,12 +1,20 @@
 const { ObjectSchema } = require("yup");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 
 /**
- * Middleware Body Validation
- * @param {ObjectSchema} yupValidator
+ * Middleware for validating request body using Yup schema.
+ * @module middlewares/bodyValidation
+ * @param {Object} yupValidator - The Yup validator object.
+ * @returns {Function} - Express middleware function.
  */
-
-const bodyValidation = (yupValidator) => {
+module.exports = (yupValidator) => {
+  /**
+   * Express middleware function for validating request body.
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @param {Function} next - The next middleware function.
+   * @returns {Promise<void>}
+   */
   return async (req, res, next) => {
     try {
       const validData = await yupValidator
@@ -21,5 +29,3 @@ const bodyValidation = (yupValidator) => {
     }
   };
 };
-
-module.exports = bodyValidation;

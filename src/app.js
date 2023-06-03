@@ -20,7 +20,7 @@ app.use(
 app.use(express.json());
 app.use(express.static("public"));
 
-// Database initialization
+// Initialize database
 const db = require("./models");
 db.sequelize
   .authenticate()
@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === "development") {
   db.sequelize.sync({ force: false });
 }
 
-// Router
+// Initialize routing
 const router = require("./routes");
 app.use("/", router);
 

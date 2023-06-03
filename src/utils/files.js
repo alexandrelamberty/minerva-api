@@ -3,9 +3,18 @@ const fs = require("fs");
 // FIXME: Refactor to generic file utils
 /**
  * Cover utils
- * https://nodejs.org/api/fs.html
+ *
+ * @module utils/files
+ * @see {@link https://nodejs.org/api/fs.html|Node.js File System}
+ * @param {*} folder
+ * @returns {multer.StorageEngine}
  */
 const cover = {
+  /**
+   * Delete a file from the public folder.
+   * @memberof module:utils/files
+   * @param {*} file
+   */
   deleteCover: (file) => {
     try {
       fs.unlinkSync("public" + file);

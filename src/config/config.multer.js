@@ -3,9 +3,11 @@ const uuid = require("uuid");
 
 /**
  * Multer DiskStorage configuration
- * @see {@link http://expressjs.com/en/resources/middleware/multer.html|"Express multer middleware"}
+ *
+ * @module config/multer
+ * @see {@link http://expressjs.com/en/resources/middleware/multer.html|Express multer middleware}
  * @param {*} folder
- * @returns
+ * @returns {multer.StorageEngine}
  */
 const config = (folder) => {
   return (storage = multer.diskStorage({

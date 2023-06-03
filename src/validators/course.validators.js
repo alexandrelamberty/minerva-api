@@ -1,5 +1,14 @@
 const yup = require("yup");
 
+/**
+ * Module for validating course data using Yup.
+ * @module validators/courseValidators
+ * @requires yup
+ */
+
+/**
+ * Define the validation schema for creating a course.
+ */
 const createCourseValidator = yup.object({
   name: yup.string().required().max(50).trim(),
   description: yup.string().required().max(50).trim(),
@@ -17,6 +26,9 @@ const createCourseValidator = yup.object({
   ),
 });
 
+/**
+ * Define the validation schema for updating a course.
+ */
 const updateCourseValidator = yup.object({
   name: yup.string().required().max(50).trim(),
   description: yup.string().required().max(50).trim(),

@@ -1,11 +1,21 @@
 const jsonwebtoken = require("jsonwebtoken");
 
 const { JWT_SECRET, JWT_AUDIENCE, JWT_ISSUER, JWT_EXPIRE } = process.env;
+
 /**
  * JWT helpers
- * https://www.npmjs.com/package/jsonwebtoken
+ *
+ * @module utils/jwt
+ * @see {@link https://www.npmjs.com/package/jsonwebtoken|JSON Web Token}
+ * @param {*} folder
  */
 const jwt = {
+  /**
+   * Generate a JSON web token
+   * @memberof module:utils/jwt
+   * @param {*} param0
+   * @returns {Promise<any>}
+   */
   generate: ({ id, role }) => {
     return new Promise((resolve, reject) => {
       const payload = { id, role };
@@ -27,6 +37,12 @@ const jwt = {
     });
   },
 
+  /**
+   * Decode a JSON web token
+   * @memberof module:utils/jwt
+   * @param {*} token
+   * @returns {Promise}
+   */
   decode: (token) => {
     return new Promise((resolve, reject) => {
       const options = {

@@ -1,16 +1,22 @@
 const { Request, Response } = require("express");
 const enrollmentService = require("../services/enrollment.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
+} = require("../responses/success.response");
 
+/**
+ * Controller for enrollment-related operations.
+ * @module controllers/enrollmentController
+ */
 const enrollmentController = {
   /**
-   * Search Users
-   * @param {Request} req
-   * @param {Response} res
+   * Search for enrollments based on the provided search terms.
+   * @memberof module:controllers/enrollmentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   search: async (req, res) => {
     const terms = req.params.terms;
@@ -21,9 +27,11 @@ const enrollmentController = {
   },
 
   /**
-   * Get All Users
-   * @param {Request} req
-   * @param {Response} res
+   * Get all enrollments with pagination.
+   * @memberof module:controllers/enrollmentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getAll: async (req, res) => {
     const { offset, limit } = req.pagination;
@@ -35,9 +43,11 @@ const enrollmentController = {
   },
 
   /**
-   * Get a User By Id
-   * @param {Request} req
-   * @param {Response} res
+   * Get an enrollment by its ID.
+   * @memberof module:controllers/enrollmentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getById: async (req, res) => {
     const { id } = req.params;
@@ -57,9 +67,11 @@ const enrollmentController = {
   },
 
   /**
-   * Create an Enrollment
-   * @param {Request} req
-   * @param {Response} res
+   * Create a new enrollment.
+   * @memberof module:controllers/enrollmentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   create: async (req, res) => {
     const { id } = req.params;
@@ -73,9 +85,11 @@ const enrollmentController = {
   },
 
   /**
-   * Update a User
-   * @param {Request} req
-   * @param {Response} res
+   * Update an enrollment.
+   * @memberof module:controllers/enrollmentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   update: async (req, res) => {
     const { id } = req.params;
@@ -89,9 +103,11 @@ const enrollmentController = {
   },
 
   /**
-   * Delete a User
-   * @param {Request} req
-   * @param {Response} res
+   * Delete an enrollment.
+   * @memberof module:controllers/enrollmentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   delete: async (req, res) => {
     const { id } = req.params;

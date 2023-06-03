@@ -2,10 +2,20 @@ const { CourseDateDTO } = require("../dto/course-date.dto");
 const { OrderDTO } = require("../dto/order.dto");
 const db = require("../models");
 /**
+ * Service to create, update, and retrieve course dates information, including
+ * date, course, trainer, students, attendances.
  *
- * See {@link CourseDate}
+ * @module services/course-date
  */
-const courseDate = {
+const courseDateService = {
+  /**
+   * Search for course-dates based on the provided search terms.
+   * @memberof module:services/course-date
+   * @param {number} offset - The number of items to skip before starting to return results.
+   * @param {number} limit - The maximum number of items to return.
+   * @returns
+   * @throws {Error} - If the update operation fails or encounters an error.
+   */
   getAll: async (offset, limit) => {
     const { rows, count } = await db.CourseDate.findAndCountAll({
       distinct: true,
@@ -30,6 +40,13 @@ const courseDate = {
     };
   },
 
+  /**
+   *
+   * @memberof module:services/course-date
+   * @param {*} id
+   * @returns
+   * @throws {Error} - If the update operation fails or encounters an error.
+   */
   getById: async (id) => {
     const order = await db.CourseDate.findByPk(id, {
       include: [
@@ -45,6 +62,13 @@ const courseDate = {
     return order ? new OrderDTO(order) : null;
   },
 
+  /**
+   *
+   * @memberof module:services/course-date
+   * @param {*} id
+   * @returns
+   * @throws {Error} - If the update operation fails or encounters an error.
+   */
   create: async (courseId, courseDateToAdd) => {
     const transaction = await db.sequelize.transaction();
     try {
@@ -77,6 +101,14 @@ const courseDate = {
     }
   },
 
+  /**
+   *
+   * @memberof module:services/course-date
+   * @param {*} id
+   * @param {*} updateCourseDate
+   * @returns
+   * @throws {Error} - If the update operation fails or encounters an error.
+   */
   update: async (id, updateCourseDate) => {
     const transaction = await db.sequelize.transaction();
 
@@ -108,6 +140,13 @@ const courseDate = {
     }
   },
 
+  /**
+   * Deletes course-date with the provided ID.
+   * @memberof module:services/course-date
+   * @param {*} id
+   * @returns
+   * @throws {Error} - If the update operation fails or encounters an error.
+   */
   delete: async (id) => {
     const nbDeletedRow = await db.CourseDate.destroy({
       where: { id },
@@ -117,4 +156,4 @@ const courseDate = {
   },
 };
 
-module.exports = courseDate;
+module.exports = courseDateService;

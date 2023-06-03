@@ -58,13 +58,16 @@ const logError = (error) => {
 };
 
 /**
- * Service that use the OpenAI API
- * https://platform.openai.com/docs/introduction
+ * Service that use A.I. to help generate content.
+ * @module service/ai
+ * @see {@link https://platform.openai.com/docs/introduction|Test}
  */
-const openaiService = {
+const aiService = {
   /**
    * Use the Completion API to suggest a category name.
+   * @memberof module:services/ai
    * @returns
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   suggestCategoryName: async () => {
     const prompt =
@@ -91,8 +94,10 @@ const openaiService = {
   },
 
   /**
-   * Use the Completion API to suggest a description for category name .
+   * Use the Completion API to suggest a description for category name
+   * @memberof module:services/ai
    * @returns
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   describeCategory: async (terms) => {
     const prompt =
@@ -121,7 +126,9 @@ const openaiService = {
 
   /**
    * Use the Completion API to suggest a training name.
+   * @memberof module:services/ai
    * @returns
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   suggestTrainingName: async () => {
     const prompt =
@@ -148,8 +155,10 @@ const openaiService = {
   },
 
   /**
-   * Use the Completion API to suggest a description for training name .
+   * Use the Completion API to suggest a description for training name.
+   * @memberof module:services/ai
    * @returns
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   describeTraining: async (terms) => {
     const prompt =
@@ -176,8 +185,10 @@ const openaiService = {
   },
 
   /**
-   * Use the Images API to suggest a description for training name .
+   * Use the Images API to suggest a description for training name.
+   * @memberof module:services/ai
    * @returns
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   thumbnail: async (terms) => {
     const prompt = "Image about programming";
@@ -200,4 +211,4 @@ const openaiService = {
   },
 };
 
-module.exports = openaiService;
+module.exports = aiService;

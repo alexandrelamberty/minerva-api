@@ -1,9 +1,18 @@
-// const argon2 = require("argon2");
 const { UserDTO } = require("../dto/user.dto");
 const db = require("../models");
 const bcrypt = require("bcrypt");
 
-const authService = {
+/**
+ * Service for user authentication, including registration and login.
+ * @module services/auth
+ */
+module.exports = {
+  /**
+   * Registers a new user account in the system.
+   * @memberof module:services/auth
+   * @param {*} userToAdd - The user data to add.
+   * @returns {Promise<UserDTO>} A promise that resolves with the created user as a UserDTO instance, or null if creation fails.
+   */
   register: async (userToAdd) => {
     // Password hashing with bcrypt or argon2, see the user model
     // to a hook implementation of password hashing.
@@ -18,7 +27,13 @@ const authService = {
     const user = await db.User.create(userToAdd);
     return user ? new UserDTO(user) : null;
   },
-
+  /**
+   * Logs a user into the system.
+   * @memberof module:services/auth
+   * @param {*} email - The user's email.
+   * @param {*} password - The user's password.
+   * @returns {Promise<UserDTO>} A promise that resolves with the authenticated user as a UserDTO instance, or null if authentication fails.
+   */
   login: async (email, password) => {
     const user = await db.User.findOne({
       where: { email },
@@ -34,5 +49,3 @@ const authService = {
     return new UserDTO(user);
   },
 };
-
-module.exports = authService;
