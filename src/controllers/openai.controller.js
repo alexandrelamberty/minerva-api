@@ -8,7 +8,7 @@ const {
 
 const openaiController = {
   /**
-   * Prompt for a description of a category name
+   * Suggest a category name
    * @param {Request} req
    * @param {Response} res
    */
@@ -22,7 +22,7 @@ const openaiController = {
   },
 
   /**
-   * Prompt for a description of a category name
+   * Describe a category name
    * @param {Request} req
    * @param {Response} res
    */
@@ -37,7 +37,7 @@ const openaiController = {
   },
 
   /**
-   * Prompt for a suggestion of a training name
+   * Suggest a training name
    * @param {Request} req
    * @param {Response} res
    */
@@ -51,13 +51,28 @@ const openaiController = {
   },
 
   /**
-   * Prompt for a description of a training name
+   * Describe a training name
    * @param {Request} req
    * @param {Response} res
    */
   describeTraining: async (req, res) => {
     const terms = req.body.terms;
     const description = await openaiService.describeTraining(terms);
+    if (!description) {
+      res.sendStatus(404);
+      return;
+    }
+    res.status(200).json(description);
+  },
+
+  /**
+   * Generate a thumbnail
+   * @param {Request} req
+   * @param {Response} res
+   */
+  thumbnail: async (req, res) => {
+    const terms = req.body.category;
+    const description = await openaiService.thumbnail(terms);
     if (!description) {
       res.sendStatus(404);
       return;
