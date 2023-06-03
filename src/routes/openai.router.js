@@ -34,4 +34,9 @@ openaiRouter
   .route("/training/describe")
   .post(openaiController.describeTraining);
 
+/**
+ * Generate a thumbnail
+ */
+openaiRouter.route("/thumbnail").post(openaiController.thumbnail);
+
 module.exports = openaiRouter;
