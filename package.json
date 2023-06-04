@@ -11,13 +11,16 @@
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
     "seed:all": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo:all",
-    "docker:build": "docker build . -t alexandrelamberty/bookstore-api:master",
-    "docker:push": "docker push alexandrelamberty/bookstore-api:master"
+    "docker:build": "docker build . -t alexandrelamberty/minerva-api:'${branch}'",
+    "docker:push": "docker push alexandrelamberty/minerva-api:$branch",
+    "lint:check": "eslint .",
+    "format:check": "prettier --check ."
   },
   "author": "Alexandre Lamberty <mail@alexandrelamberty.com>",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.42.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.8.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.8"
