@@ -174,7 +174,7 @@ module.exports = {
     }
     // If the category has already a cover delete the old one.
     // FIXME: must be different than the property passed from the form Delete old cover
-    if (category.cover) deleteCover(cover);
+    if (category.cover) deleteCover(category.cover);
 
     const isUpdated = await categoryService.updateCover(id, filename);
     if (!isUpdated) {

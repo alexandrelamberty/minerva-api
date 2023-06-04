@@ -1,10 +1,20 @@
+const multer = require("multer");
 const categoryController = require("../controllers/training-category.controller");
 const authJwt = require("../middlewares/auth.jwt.middleware");
 const bodyValidation = require("../middlewares/body.validator");
 const pagination = require("../middlewares/pagination.middleware");
-const trainingValidator = require("../validators/training.validators");
+const {
+  createCategoryValidator,
+  updateCategoryValidator,
+} = require("../validators/category.validators");
 
 const categoryRouter = require("express").Router();
+
+/**
+ * Multer configuration for the trainings covers
+ */
+const storage = require("../config/config.multer")("covers");
+const upload = multer({ storage });
 
 /**
  * Route for searching categories by terms.
@@ -41,7 +51,7 @@ categoryRouter
  */
 categoryRouter.route("/").post(
   // authJwt(["Admin"]),
-  bodyValidation(trainingValidator),
+  bodyValidation(createCategoryValidator),
   categoryController.create
 );
 
@@ -67,7 +77,7 @@ categoryRouter
   .route("/:id")
   .patch(
     authJwt(["Admin"]),
-    bodyValidation(trainingValidator),
+    bodyValidation(updateCategoryValidator),
     categoryController.update
   );
 

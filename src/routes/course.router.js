@@ -1,3 +1,4 @@
+const multer = require("multer");
 const courseController = require("../controllers/course.controller");
 const authJwt = require("../middlewares/auth.jwt.middleware");
 const bodyValidation = require("../middlewares/body.validator");
@@ -8,6 +9,12 @@ const {
 } = require("../validators/course.validators");
 
 const courseRouter = require("express").Router();
+
+/**
+ * Multer configuration for the trainings covers
+ */
+const storage = require("../config/config.multer")("covers");
+const upload = multer({ storage });
 
 /**
  * Search courses

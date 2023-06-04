@@ -10,7 +10,7 @@ const uuid = require("uuid");
  * @returns {multer.StorageEngine}
  */
 const config = (folder) => {
-  return (storage = multer.diskStorage({
+  return multer.diskStorage({
     // destination is used to determine within which folder the uploaded files
     // should be stored.
     destination: (req, file, callback) => {
@@ -25,7 +25,7 @@ const config = (folder) => {
       const ext = file.originalname.split(".").at(-1);
       callback(null, name + "." + ext);
     },
-  }));
+  });
 };
 
 module.exports = config;

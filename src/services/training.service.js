@@ -114,7 +114,7 @@ const trainingService = {
 
     // Retrieve the training
     const training = await db.Training.findByPk(id, {
-      include: [Genre, Publisher, Author],
+      include: [],
     });
 
     try {

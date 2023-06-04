@@ -15,7 +15,7 @@
     "seed:undo": "npx sequelize-cli db:seed:undo:all",
     "docker:build": "docker build . -t alexandrelamberty/minerva-api:'${branch}'",
     "docker:push": "docker push alexandrelamberty/minerva-api:$branch",
-    "lint:check": "eslint .",
+    "lint": "eslint src --ext js --report-unused-disable-directives --max-warnings 0",
     "format:check": "prettier --check .",
     "format:format": "prettier --write **/*.{js,md}",
     "doc": "npx jsdoc src -r --destination docs --readme ./README.md --package ./package.json",

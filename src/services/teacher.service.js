@@ -80,7 +80,7 @@ const teacherService = {
    */
   create: async (teacherToAdd) => {
     const teacher = await db.Teacher.create(teacherToAdd);
-    return teacher ? new TeacherDTO(student) : null;
+    return teacher ? new TeacherDTO(teacher) : null;
   },
 
   /**

@@ -23,7 +23,7 @@ class StudentDTO {
     this.trainings = Trainings
       ? Trainings.map((training) => {
           console.log(training);
-          return new StudentTrainingDTO(training);
+          // return new StudentTrainingDTO(training);
           return { id: training.id, name: training.name };
         })
       : [];

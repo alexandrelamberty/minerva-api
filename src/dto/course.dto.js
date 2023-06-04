@@ -1,3 +1,4 @@
+const { CourseDateStudentDTO } = require("./course-date.dto");
 const { CourseMaterialDTO } = require("./course-material.dto");
 const { TeacherDTO } = require("./teacher.dto");
 
@@ -39,7 +40,9 @@ class CourseDTO {
         })
       : [];
     this.materials = CourseMaterials
-      ? CourseMaterials.map((courseMaterial) => new CourseMaterialDTO(author))
+      ? CourseMaterials.map(
+          (courseMaterial) => new CourseMaterialDTO(courseMaterial)
+        )
       : [];
   }
 }

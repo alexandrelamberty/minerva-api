@@ -1,8 +1,7 @@
 const { Request, Response, NextFunction } = require("express");
-const db = require("../models");
-const userService = require("../services/user.service");
 const { ErrorResponse } = require("../responses/error.response");
 const jwt = require("../utils/jwt");
+const userService = require("../services/user.service");
 
 /**
  * Middleware function for role-based authentication and authorization.

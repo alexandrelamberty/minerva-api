@@ -14,4 +14,4 @@ const courseDateAttendanceValidator = yup.object({
   date: yup.string().required().max(50).trim(),
 });
 
-module.exports = courseDateValidator;
+module.exports = courseDateAttendanceValidator;

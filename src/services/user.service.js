@@ -84,7 +84,7 @@ module.exports = {
    * @throws {Error} - If the operation fails or encounters an error.
    */
   update: async (userId, userUpdate) => {
-    const updatedRow = await db.User.update(userToUpdate, {
+    const updatedRow = await db.User.update(userUpdate, {
       where: { id: userId },
     });
     return updatedRow[0] === 1;

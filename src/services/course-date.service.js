@@ -84,7 +84,9 @@ const courseDateService = {
   create: async (courseDateToAdd) => {
     const transaction = await db.sequelize.transaction();
     try {
-      let courseDate = await db.CourseDate.create({ CourseId: courseId });
+      let courseDate = await db.CourseDate.create({
+        CourseId: courseDateToAdd.courseId,
+      });
 
       // Add the books and quantity to the order
       for (const student of courseDateToAdd.students) {
@@ -95,7 +97,7 @@ const courseDateService = {
       }
       await transaction.commit();
 
-      const addedCourseDate = await db.CourseDate.findByPk(order.id, {
+      const addedCourseDate = await db.CourseDate.findByPk(courseDate.id, {
         include: [
           db.Course,
           {

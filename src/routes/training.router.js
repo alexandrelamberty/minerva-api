@@ -17,14 +17,34 @@ const storage = require("../config/config.multer")("covers");
 const upload = multer({ storage });
 
 /**
- * Search Trainings
+ * Route for searching trainings by terms.
+ * @name /search/:terms
+ * @function
+ * @memberof module:routers/trainingRouter
+ * @param {function} controller - Controller function for searching trainings.
  */
 trainingRouter.route("/search/:terms").get(trainingController.search);
 
 /**
- * Get all trainings / Post training
+ * Route for getting all trainings with pagination.
+ * @name /
+ * @function
+ * @memberof module:routers/trainingRouter
+ * @param {function} middleware - Middleware function for pagination.
+ * @param {function} controller - Controller function for getting all categories.
  */
-trainingRouter.route("/").get(pagination(), trainingController.getAll).post(
+trainingRouter.route("/").get(pagination(), trainingController.getAll);
+
+/**
+ * Route for creating a new training.
+ * @name /
+ * @function
+ * @memberof module:routers/categoryRouter
+ * @param {function} middleware - Middleware function for JWT authentication and authorization.
+ * @param {function} middleware - Middleware function for request body validation using the trainingValidator.
+ * @param {function} controller - Controller function for creating a new category.
+ */
+trainingRouter.route("/").post(
   // authJwt(["Admin"]),
   bodyValidation(createTrainingValidator),
   trainingController.create
