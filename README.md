@@ -1,6 +1,7 @@
-[![Node](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml)
+[![Build](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml)
 [![DockerHub](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml)
-[![Documentation](https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml)
+[![Linting](https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml)
+[![Formatting](https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml)
 
 # Minerva - Training Management System API
 
@@ -91,7 +92,7 @@ npm run seed:undo
 Build the image.
 
 ```shell
-docker build . -t alexandrelamberty/minerva-api:tag 
+docker build . -t alexandrelamberty/minerva-api:tag
 ```
 
 Run the image with the default network and storage.
