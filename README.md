@@ -1,5 +1,6 @@
-[![Node build](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml)
-[![Node Docker DockerHub](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml)
+[![Node](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml)
+[![DockerHub](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml)
+[![Documentation](https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml)
 
 # Minerva - Training Management System API
 
