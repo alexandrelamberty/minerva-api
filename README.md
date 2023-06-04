@@ -88,7 +88,7 @@ npm run seed:undo
 Build the image.
 
 ```shell
-docker build . -t alexandrelamberty/minerva-api:tag 
+docker build . -t alexandrelamberty/minerva-api:tag
 ```
 
 Run the image with the default network and storage.
