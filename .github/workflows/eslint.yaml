@@ -12,7 +12,7 @@ on:
 
 jobs:
   linting:
-    name: Linting
+    name: Lint code
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,5 +29,5 @@ jobs:
       - name: Install modules
         run: npm install
 
-      - name: Run lint
+      - name: Lint code
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
