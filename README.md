@@ -2,6 +2,7 @@
 [![DockerHub](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml)
 [![Linting](https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml)
 [![Formatting](https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml)
+[![DockerHub](https://img.shields.io/badge/DockerHub-images-important.svg?logo=Docker)](https://hub.docker.com/r/alexandrelamberty/minerva-api)
 
 # Minerva - Training Management System API
 
