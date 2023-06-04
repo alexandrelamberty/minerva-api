@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>services/course-date - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,109 +29,1145 @@
 
 <div id="main">
     
+    <h1 class="page-title">services/course-date</h1>
+    
 
     
 
 
 
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Service to create, update, and retrieve course dates information, including
+date, course, trainer, students, attendances.</div>
+        
+
+        
+            
+<div class="section-method">
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_course-date.service.js.html">services/course-date.service.js</a>, <a href="services_course-date.service.js.html#line4">line 4</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(courseDateToAdd)</span><span class="type-signature"> &rarr; {Promise.&lt;(<a href="CourseDateDTO.html">CourseDateDTO</a>|null)>}</span></h4>
+
     
 
 
 
+<div class="description">
+    Create course-date with the provided data.
+</div>
 
 
 
 
 
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_course-date.service.js.html">services/course-date.service.js</a>, <a href="services_course-date.service.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>courseDateToAdd</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>*</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The course-date data to be added.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-throws">
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        - If the operation fails or encounters an error.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type"><code>Error</code></span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+</div>
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>Promise.&lt;(<a href="CourseDateDTO.html">CourseDateDTO</a>|null)></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    A promise that resolves to a new CourseDateDTO instance representing the created course-date, or null if creation fails.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".delete"><span class="type-signature">(static) </span>delete<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
 
     
 
 
-    <section class="readme">
-        <article><p><a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg" alt="Node"></a>
-<a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml/badge.svg" alt="DockerHub"></a>
-<a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml/badge.svg" alt="Documentation"></a></p>
-<h1>Minerva - Training Management System API</h1>
-<p>The Training Management System API is a powerful tool designed to streamline and automate the process of managing training programs within an organization. It provides a comprehensive set of endpoints that allow developers to integrate and interact with the Training Management System seamlessly.</p>
-<h2>Key Features</h2>
-<ul>
-<li><strong>User Management</strong>: Easily manage user profiles, including creation, modification, and authentication, ensuring secure access to the system.</li>
-<li><strong>Training Management</strong>: Efficiently create, update, and retrieve training information, including descriptions, category, courses, trainer.</li>
-<li><strong>Course Management</strong>: Efficiently create, update, and retrieve course information, including descriptions, schedules, trainer.</li>
-<li><strong>Enrollment</strong>: Enable users to enroll in specific courses, track their progress, and receive notifications for upcoming sessions.</li>
-<li><strong>Progress Tracking</strong>: Keep tabs on individual learner progress, track completion rates, and generate insightful reports on training performance.</li>
-<li><strong>Notifications</strong>: Automate communication with users by sending notifications about course updates, enrollment confirmations, and upcoming sessions.</li>
-<li><strong>Permissions and Roles</strong>: Assign different access levels and roles to users, enabling fine-grained control over the system's functionality.</li>
-</ul>
-<h2>Usage</h2>
-<blockquote>
-<p>This API is part of the <a href="https://github.com/alexandrelamberty/minerva">Minerva</a> project.</p>
-</blockquote>
-<h2>Development</h2>
-<p>To start the API without launching the complete stack, a MySQL database is needed.
-To change the database see <a href="https:%5C/%5C/sequelize.org/docs/v6/getting-started/">https://sequelize.org/docs/v6/getting-started/</a> for the sequelize drivers available. After installation change the dialect in <code>src/models/index.js</code> and <code>config/config.js</code>.</p>
-<p>Create an <code>.env</code> file and add the following environment variables and fill accordingly with the database configuration. The rest of the configuration work as it is in development.</p>
-<pre class="prettyprint source lang-properties"><code>API_PORT=3000
-DB_SERVER=localhost
-DB_ROOT_PASSWORD=localhost
-DB_DATABASE=minerva
-DB_USERNAME=minerva
-DB_PASSWORD=minerva
-DB_PORT=3306
-JWT_SECRET=d7a481461577ba4c3c4c6946cca7204b
-JWT_EXPIRE=1d
-JWT_ISSUER=minerva
-JWT_AUDIENCE=web-minerva
-OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
-</code></pre>
-<p>Start the application in watch mode</p>
-<pre class="prettyprint source lang-shell"><code>npm run star:dev
-</code></pre>
-<h2>Migrations</h2>
-<p>Run the migrations</p>
-<pre class="prettyprint source lang-shell"><code>npm run migrate:up
-</code></pre>
-<p>Roll back migrations</p>
-<pre class="prettyprint source lang-shell"><code>npm run migrate:undo
-</code></pre>
-<h3>Seeds</h3>
-<p>Create seed</p>
-<pre class="prettyprint source lang-shell"><code>npx sequelize-cli seed:generate --name demo-user
-</code></pre>
-<p>Running the seeds</p>
-<pre class="prettyprint source lang-shell"><code>npm run seed:all
-</code></pre>
-<p>Roll back seeding</p>
-<pre class="prettyprint source lang-shell"><code>npm run seed:undo
-</code></pre>
-<h2>Tests</h2>
-<h2>Documentation</h2>
-<h2>Docker</h2>
-<p>Build the image.</p>
-<pre class="prettyprint source lang-shell"><code>docker build . -t alexandrelamberty/minerva-api:tag 
-</code></pre>
-<p>Run the image with the default network and storage.</p>
-<p>// FIXME: add storage reference from stack</p>
-<pre class="prettyprint source lang-shell"><code>docker run -p 3000:3000 --network=minerva_default --mount source=media_data,target=/usr/src/app/public --env-file .env.dev --name minerva-api -d alexandrelamberty/minerva-api:tag
-</code></pre>
-<p>Push image to DockerHub</p>
-<pre class="prettyprint source lang-shell"><code>docker push alexandrelamberty/minerva-api:tag
-</code></pre>
-<h2>References</h2>
-<ul>
-<li><a href="https:%5C/%5C/expressjs.com/">https://expressjs.com/</a></li>
-<li><a href="https:%5C/%5C/nodejs.org/">https://nodejs.org/</a></li>
-<li><a href="https:%5C/%5C/github.com/ranisalt/node-argon2">https://github.com/ranisalt/node-argon2</a></li>
-<li><a href="https:%5C/%5C/sequelize.org/docs/v6/">https://sequelize.org/docs/v6/</a></li>
-<li><a href="https:%5C/%5C/sequelize.org/docs/v6/other-topics/migrations/">https://sequelize.org/docs/v6/other-topics/migrations/</a></li>
-<li><a href="https:%5C/%5C/developers.google.com/books/docs/viewer/developers_guide">https://developers.google.com/books/docs/viewer/developers_guide</a></li>
-<li><a href="https:%5C/%5C/medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58">https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58</a></li>
-<li><a href="https:%5C/%5C/medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58">https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58</a></li>
-<li><a href="https:%5C/%5C/developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a></li>
-</ul></article>
-    </section>
+
+<div class="description">
+    Deletes course-date with the provided ID.
+</div>
 
 
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_course-date.service.js.html">services/course-date.service.js</a>, <a href="services_course-date.service.js.html#line156">line 156</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>*</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The ID of the course-date to delete.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-throws">
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        - If the operation fails or encounters an error.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type"><code>Error</code></span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+</div>
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>Promise.&lt;boolean></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    - A promise that resolves to true if the course-date was successfully deleted, or false otherwise.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".getById"><span class="type-signature">(static) </span>getById<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise.&lt;(<a href="CourseDateDTO.html">CourseDateDTO</a>|null)>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Retrieve course-date details with the provided ID.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_course-date.service.js.html">services/course-date.service.js</a>, <a href="services_course-date.service.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>*</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The ID of the course-date to retrieve.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-throws">
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        - If the operation fails or encounters an error.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type"><code>Error</code></span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+</div>
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>Promise.&lt;(<a href="CourseDateDTO.html">CourseDateDTO</a>|null)></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    A promise that resolves to a CourseDateDTO instance representing the retrieved course, or null if the course is not found.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".search"><span class="type-signature">(static) </span>search<span class="signature">(offset, limit)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="CourseDateDTO.html">CourseDateDTO</a>>>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Search for course-dates based on the provided search terms.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_course-date.service.js.html">services/course-date.service.js</a>, <a href="services_course-date.service.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>offset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The number of items to skip before starting to return results.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>limit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The maximum number of items to return.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-throws">
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        - If the operation fails or encounters an error.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type"><code>Error</code></span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+</div>
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>Promise.&lt;Array.&lt;<a href="CourseDateDTO.html">CourseDateDTO</a>>></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    A promise that resolves to an array of CourseDateDTO objects matching the search terms.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".update"><span class="type-signature">(static) </span>update<span class="signature">(id, updateCourseDate)</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Update course-date with the provided data.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_course-date.service.js.html">services/course-date.service.js</a>, <a href="services_course-date.service.js.html#line124">line 124</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>*</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The ID of the course-date to update.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>updateCourseDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>*</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The updated data for the course-date.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-throws">
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        - If the operation fails or encounters an error.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type"><code>Error</code></span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+</div>
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>Promise.&lt;boolean></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    - A promise that resolves to true if the course-date was successfully updated, or false otherwise.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

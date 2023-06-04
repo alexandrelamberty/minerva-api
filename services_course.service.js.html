@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>services/course.service.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,109 +29,285 @@
 
 <div id="main">
     
+    <h1 class="page-title">services/course.service.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { Op } = require("sequelize");
+const { CourseDTO } = require("../dto/course.dto");
+const db = require("../models");
 
+/**
+ * Service to create, update, and retrieve course information.
+ * @module services/course
+ */
+const courseService = {
+  /**
+   * Search for courses based on the provided search terms.
+   * @memberof module:services/course
+   * @param {*} terms - The search terms to match against training name.
+   * @param {number} offset - The number of items to skip before starting to return results.
+   * @param {number} limit - The maximum number of items to return.
+   * @returns {Promise&lt;CourseDTO[]>} A promise that resolves to an array of CourseDTO objects matching the search terms.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  search: async (terms) => {
+    console.log("Search terms", terms);
+    const { rows, count } = await db.Course.findAndCountAll({
+      where: {
+        name: {
+          [Op.like]: `%${terms}%`,
+        },
+      },
+      distinct: true,
+    });
+    return {
+      courses: rows.map((course) => new CourseDTO(course)),
+      count,
+    };
+  },
 
+  /**
+   * Retrieve a paginated list of course.
+   * @memberof module:services/course
+   * @param {number} offset - The number of items to skip before starting to return results.
+   * @param {number} limit - The maximum number of items to return.
+   * @returns {Promise&lt;{ students: Array&lt;CourseDTO>, count: number }>} - A promise that resolves to an object containing an array of CourseDateDTO objects representing the course-date and the total count of teachers.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  getAll: async (offset, limit) => {
+    const { rows, count } = await db.Course.findAndCountAll({
+      distinct: true,
+      offset,
+      limit,
+      include: [
+        db.Training,
+        {
+          model: db.Teacher,
+          // attributes: ["UserId"],
+          include: [
+            {
+              model: db.User,
+              attributes: ["firstName", "lastName"],
+            },
+          ],
+        },
+        {
+          association: "dates",
+          include: [
+            {
+              model: db.Teacher,
+              // attributes: ["UserId"],
+              include: [
+                { model: db.User, attributes: ["firstName", "lastName"] },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    return {
+      courses: rows.map((course) => new CourseDTO(course)),
+      count,
+    };
+  },
 
+  /**
+   * Retrieve the course details with the provided ID.
+   * @memberof module:services/course
+   * @param {*} id - The ID of the course to retrieve.
+   * @returns {Promise&lt;CourseDTO|null>} A promise that resolves to a CourseDTO instance representing the retrieved course, or null if the course is not found.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  getById: async (id) => {
+    const course = await db.Course.findByPk(id, {
+      include: [
+        db.Training,
+        {
+          model: db.Teacher,
+          include: [
+            {
+              model: db.User,
+              attributes: ["firstName", "lastName"],
+            },
+          ],
+        },
+        {
+          association: "dates",
+          include: [
+            {
+              model: db.Teacher,
+              // attributes: ["UserId"],
+              include: [
+                { model: db.User, attributes: ["firstName", "lastName"] },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    return course ? new CourseDTO(course) : null;
+  },
 
+  /**
+   * Create a course with the provided data.
+   * @memberof module:services/course
+   * @param {*} courseToAdd - The course data to be added.
+   * @returns {Promise&lt;CourseDTO|null>} A promise that resolves to a new CourseDTO instance representing the created course, or null if creation fails.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  create: async (courseToAdd) => {
+    console.log("Service Create course: ", courseToAdd);
+    const course = await db.Course.create(courseToAdd);
+    await course.setTraining(courseToAdd.Training.id);
+    await course.setTeacher(courseToAdd.Teacher.id);
 
+    console.log("Service course created", course);
 
+    // console.log(await course.countDates());
+    const newCourse = await db.Course.findByPk(course.id, {
+      include: [
+        db.Training,
+        {
+          model: db.Teacher,
+          include: [
+            {
+              model: db.User,
+              attributes: ["firstName", "lastName"],
+            },
+          ],
+        },
+        {
+          association: "dates",
+          include: [
+            {
+              model: db.Teacher,
+              // attributes: ["UserId"],
+              include: [
+                {
+                  model: db.User,
+                  attributes: ["firstName", "lastName"],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    console.log("create course find: ", newCourse);
+    return newCourse ? new CourseDTO(newCourse) : null;
+  },
 
+  /**
+   *
+   * @memberof module:services/course
+   * @param {*} id - The ID of the course to update
+   * @param {*} courseDTO - The detail of the course to update
+   * @returns {Promise&lt;boolean>} - A promise that resolves to true if the course was successfully deleted, or false otherwise.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  update: async (id, courseDTO) => {
+    const transaction = await db.sequelize.transaction();
+    console.log("ID: ", id);
+    console.log("DTO: ", courseDTO);
 
+    const course = await db.Course.findByPk(id, {
+      include: [
+        // {
+        //   association: db.CourseDate,
+        //   as: "dates",
+        // },
+      ],
+    });
 
-    
+    console.log("TO UPDATE: ", course);
 
+    try {
+      for (const date of courseDTO.dates) {
+        await course.createDate(
+          {
+            TeacherId: date.TeacherId,
+            CourseId: date.CourseId,
+            date: date.date,
+          },
+          { transaction }
+        );
+      }
 
-    <section class="readme">
-        <article><p><a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg" alt="Node"></a>
-<a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yml/badge.svg" alt="DockerHub"></a>
-<a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml/badge.svg" alt="Documentation"></a></p>
-<h1>Minerva - Training Management System API</h1>
-<p>The Training Management System API is a powerful tool designed to streamline and automate the process of managing training programs within an organization. It provides a comprehensive set of endpoints that allow developers to integrate and interact with the Training Management System seamlessly.</p>
-<h2>Key Features</h2>
-<ul>
-<li><strong>User Management</strong>: Easily manage user profiles, including creation, modification, and authentication, ensuring secure access to the system.</li>
-<li><strong>Training Management</strong>: Efficiently create, update, and retrieve training information, including descriptions, category, courses, trainer.</li>
-<li><strong>Course Management</strong>: Efficiently create, update, and retrieve course information, including descriptions, schedules, trainer.</li>
-<li><strong>Enrollment</strong>: Enable users to enroll in specific courses, track their progress, and receive notifications for upcoming sessions.</li>
-<li><strong>Progress Tracking</strong>: Keep tabs on individual learner progress, track completion rates, and generate insightful reports on training performance.</li>
-<li><strong>Notifications</strong>: Automate communication with users by sending notifications about course updates, enrollment confirmations, and upcoming sessions.</li>
-<li><strong>Permissions and Roles</strong>: Assign different access levels and roles to users, enabling fine-grained control over the system's functionality.</li>
-</ul>
-<h2>Usage</h2>
-<blockquote>
-<p>This API is part of the <a href="https://github.com/alexandrelamberty/minerva">Minerva</a> project.</p>
-</blockquote>
-<h2>Development</h2>
-<p>To start the API without launching the complete stack, a MySQL database is needed.
-To change the database see <a href="https:%5C/%5C/sequelize.org/docs/v6/getting-started/">https://sequelize.org/docs/v6/getting-started/</a> for the sequelize drivers available. After installation change the dialect in <code>src/models/index.js</code> and <code>config/config.js</code>.</p>
-<p>Create an <code>.env</code> file and add the following environment variables and fill accordingly with the database configuration. The rest of the configuration work as it is in development.</p>
-<pre class="prettyprint source lang-properties"><code>API_PORT=3000
-DB_SERVER=localhost
-DB_ROOT_PASSWORD=localhost
-DB_DATABASE=minerva
-DB_USERNAME=minerva
-DB_PASSWORD=minerva
-DB_PORT=3306
-JWT_SECRET=d7a481461577ba4c3c4c6946cca7204b
-JWT_EXPIRE=1d
-JWT_ISSUER=minerva
-JWT_AUDIENCE=web-minerva
-OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
+      const updatedRow = await db.Course.update(
+        course,
+        {
+          where: { id },
+        },
+        {
+          include: [
+            { association: "dates", model: db.CourseDate, as: "dates" },
+          ],
+        }
+      );
+      await transaction.commit();
+      return updatedRow[0] === 1;
+    } catch (err) {
+      await transaction.rollback();
+      return null;
+    }
+  },
+
+  /**
+   * Delete course with the provided ID.
+   * @memberof module:services/course
+   * @param {*} courseId - The ID of the course to delete.
+   * @returns {Promise&lt;boolean>} - A promise that resolves to true if the course was successfully deleted, or false otherwise.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  delete: async (courseId) => {
+    const nbDeletedRow = await db.Course.destroy({
+      where: { id: courseId },
+    });
+    return nbDeletedRow === 1;
+  },
+
+  /**
+   * Returns an array of dates on which a course is scheduled.
+   * @memberof module:services/course
+   * @param {string} courseId - The ID of the course to retrieve the schedule for.
+   * @returns {Promise&lt;any>}
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  getDates: async (courseId) => {
+    const course = await db.Course.findByPk(courseId, {
+      include: [{ association: "dates", as: "dates" }],
+    });
+    console.log(course);
+    return course.dates;
+  },
+
+  /**
+   * Retrieve a list of material for a course.
+   * @memberof module:services/course
+   * @param {*} courseId
+   * @returns {Promise&lt;CourseDTO>}
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  getMaterials: async (courseId) => {
+    const course = await db.Course.findByPk(courseId, {
+      include: [db.CourseMaterial],
+    });
+    console.log(course);
+    return course.dates;
+  },
+};
+
+module.exports = courseService;
 </code></pre>
-<p>Start the application in watch mode</p>
-<pre class="prettyprint source lang-shell"><code>npm run star:dev
-</code></pre>
-<h2>Migrations</h2>
-<p>Run the migrations</p>
-<pre class="prettyprint source lang-shell"><code>npm run migrate:up
-</code></pre>
-<p>Roll back migrations</p>
-<pre class="prettyprint source lang-shell"><code>npm run migrate:undo
-</code></pre>
-<h3>Seeds</h3>
-<p>Create seed</p>
-<pre class="prettyprint source lang-shell"><code>npx sequelize-cli seed:generate --name demo-user
-</code></pre>
-<p>Running the seeds</p>
-<pre class="prettyprint source lang-shell"><code>npm run seed:all
-</code></pre>
-<p>Roll back seeding</p>
-<pre class="prettyprint source lang-shell"><code>npm run seed:undo
-</code></pre>
-<h2>Tests</h2>
-<h2>Documentation</h2>
-<h2>Docker</h2>
-<p>Build the image.</p>
-<pre class="prettyprint source lang-shell"><code>docker build . -t alexandrelamberty/minerva-api:tag 
-</code></pre>
-<p>Run the image with the default network and storage.</p>
-<p>// FIXME: add storage reference from stack</p>
-<pre class="prettyprint source lang-shell"><code>docker run -p 3000:3000 --network=minerva_default --mount source=media_data,target=/usr/src/app/public --env-file .env.dev --name minerva-api -d alexandrelamberty/minerva-api:tag
-</code></pre>
-<p>Push image to DockerHub</p>
-<pre class="prettyprint source lang-shell"><code>docker push alexandrelamberty/minerva-api:tag
-</code></pre>
-<h2>References</h2>
-<ul>
-<li><a href="https:%5C/%5C/expressjs.com/">https://expressjs.com/</a></li>
-<li><a href="https:%5C/%5C/nodejs.org/">https://nodejs.org/</a></li>
-<li><a href="https:%5C/%5C/github.com/ranisalt/node-argon2">https://github.com/ranisalt/node-argon2</a></li>
-<li><a href="https:%5C/%5C/sequelize.org/docs/v6/">https://sequelize.org/docs/v6/</a></li>
-<li><a href="https:%5C/%5C/sequelize.org/docs/v6/other-topics/migrations/">https://sequelize.org/docs/v6/other-topics/migrations/</a></li>
-<li><a href="https:%5C/%5C/developers.google.com/books/docs/viewer/developers_guide">https://developers.google.com/books/docs/viewer/developers_guide</a></li>
-<li><a href="https:%5C/%5C/medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58">https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58</a></li>
-<li><a href="https:%5C/%5C/medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58">https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58</a></li>
-<li><a href="https:%5C/%5C/developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a></li>
-</ul></article>
+        </article>
     </section>
-
-
 
 
 
