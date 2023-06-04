@@ -1,4 +1,4 @@
-name: Lint
+name: Linting
 
 on:
   push:
@@ -11,12 +11,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  linting:
+    name: Linting
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
     steps:
-      - uses: actions/checkout@v2
+      - name: Code checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Install modules
         run: npm install
 
-      - name: Run ESLint
-        run: eslint . --ext .js,.jsx,.ts,.tsx
+      - name: Run lint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
