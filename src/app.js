@@ -20,7 +20,7 @@ app.use(
 app.use(express.json());
 app.use(express.static("public"));
 
-// Initialize database
+// Initialize database unknown
 const db = require("./models");
 db.sequelize
   .authenticate()

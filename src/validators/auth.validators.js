@@ -25,15 +25,15 @@ const registerValidator = yup.object({
 const loginValidator = yup.object({
   email: yup
     .string()
-    .required("Email Inexistant.")
+    .required("Email required!")
     .trim()
-    .email("Email Invalide"),
+    .email("Email invalid!"),
   password: yup
     .string()
     .required()
     .matches(
       passwordRegex,
-      "The Password must contain at least 8 characters, one uppercase, one lowercase and a number."
+      "The Password must contain at least 8 characters, one uppercase, one lowercase and a number!"
     ),
 });
 

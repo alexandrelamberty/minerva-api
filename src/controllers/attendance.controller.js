@@ -66,12 +66,7 @@ module.exports = {
    */
   create: async (req, res) => {
     const data = req.body;
-    const alreadyExists = await attendanceService.nameAlreadyExists(data.name);
-    if (alreadyExists) {
-      return res
-        .status(409)
-        .json(new ErrorResponse("Le nom du attendance existe déjà", 409));
-    }
+
     const attendance = await attendanceService.create(data);
     res.location("/attendance/" + attendance.id);
     res.status(201).json(new SuccessResponse(attendance, 201));
@@ -87,12 +82,6 @@ module.exports = {
   update: async (req, res) => {
     const { id } = req.params;
     const data = req.body;
-    const alreadyExists = await attendanceService.nameAlreadyExists(data.name);
-    if (alreadyExists) {
-      return res
-        .status(409)
-        .json(new ErrorResponse("Le nom du attendance existe déjà", 409));
-    }
     const isUpdated = await attendanceService.update(id, data);
     if (!isUpdated) {
       res.sendStatus(404);

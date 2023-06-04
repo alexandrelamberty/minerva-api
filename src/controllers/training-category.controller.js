@@ -14,7 +14,7 @@ const { deleteCover } = require("../utils/files");
  */
 module.exports = {
   /**
-   * Search for categorys based on the provided search terms.
+   * Search for categories based on the provided search terms.
    * @memberof module:controllers/categoryController
    * @param {Request} req - The request object.
    * @param {Response} res - The response object.
@@ -27,7 +27,7 @@ module.exports = {
   },
 
   /**
-   * Get all categorys with pagination.
+   * Get all categories with pagination.
    * @memberof module:controllers/categoryController
    * @param {Request} req - The request object.
    * @param {Response} res - The response object.

@@ -7,7 +7,7 @@ const yup = require("yup");
  */
 
 /**
- * Validation schema for teacherv.
+ * Validation schema for teacher.
  */
 const updateTeacherValidator = yup.object({
   firstName: yup.string().required().trim(),

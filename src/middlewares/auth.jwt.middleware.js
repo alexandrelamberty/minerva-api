@@ -6,7 +6,7 @@ const jwt = require("../utils/jwt");
 
 /**
  * Middleware function for role-based authentication and authorization.
- * @module middlewares/jwt
+ * @module middleware/jwt
  * @param {string[]} roles - An array of roles allowed to access the route.
  * @returns {Function} - The middleware function.
  */
@@ -46,7 +46,7 @@ module.exports = (roles) => {
       const canAccess = roles.includes(connectedUser.role.toLowerCase());
       // If the user does not have the required role, deny access
       if (!canAccess) {
-        res.status(403).json(new ErrorResponse("Accès interdit", 403));
+        res.status(403).json(new ErrorResponse("Forbidden access!", 403));
         return;
       }
     }

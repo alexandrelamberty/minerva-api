@@ -1,4 +1,4 @@
-// FIXME: Response by ressource ?
+// FIXME: Response by resource ?
 
 /**
  * Represents a success response object.

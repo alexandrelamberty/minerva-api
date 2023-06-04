@@ -64,12 +64,6 @@ module.exports = {
    */
   create: async (req, res) => {
     const data = req.body;
-    const alreadyExists = await teacherService.nameAlreadyExists(data.name);
-    if (alreadyExists) {
-      return res
-        .status(409)
-        .json(new ErrorResponse("Le nom du teacher existe déjà", 409));
-    }
     const teacher = await teacherService.create(data);
     res.location("/teacher/" + teacher.id);
     res.status(201).json(new SuccessResponse(teacher, 201));

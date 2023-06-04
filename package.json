@@ -18,9 +18,11 @@
     "lint:check": "eslint .",
     "format:check": "prettier --check .",
     "format:format": "prettier --write **/*.{js,md}",
-    "doc": "npx jsdoc src -r --destination docs --readme ./README.md --package ./package.json"
+    "doc": "npx jsdoc src -r --destination docs --readme ./README.md --package ./package.json",
+    "test:spelling": "cspell \"{README.md,.github/*.md,src/**/*.js}\" --color"
   },
   "devDependencies": {
+    "cspell": "^6.31.1",
     "eslint": "^8.42.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.8.0",
