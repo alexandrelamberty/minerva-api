@@ -1,12 +1,12 @@
 [![Build](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml)
-[![DockerHub](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml)
 [![Linting](https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml)
 [![Formatting](https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml)
+[![Docker](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml)
 [![DockerHub](https://img.shields.io/badge/DockerHub-images-important.svg?logo=Docker)](https://hub.docker.com/r/alexandrelamberty/minerva-api)
 
 # Minerva - Training Management System API
 
-The Training Management System API is a powerful tool designed to streamline and automate the process of managing training programs within an organization. It provides a comprehensive set of endpoints that allow developers to integrate and interact with the Training Management System seamlessly.
+The Minerva API is a powerful tool designed to streamline and automate the process of managing training programs within an organization. It provides a comprehensive set of endpoints that allow developers to integrate and interact with the Training Management System seamlessly.
 
 ## Key Features
 
