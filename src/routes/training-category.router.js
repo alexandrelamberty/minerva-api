@@ -13,7 +13,7 @@ const trainingCategoryRouter = require("express").Router();
 /**
  * Multer configuration for the trainings covers
  */
-const storage = require("../utils/config.multer")("covers");
+const storage = require("../config/config.multer")("covers");
 const upload = multer({ storage });
 
 /**

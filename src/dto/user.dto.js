@@ -1,4 +1,20 @@
+/**
+ * Data Transfer Object (DTO) for representing user details.
+ */
 class UserDTO {
+  /**
+   * Create a new instance of UserDTO.
+   * @param {Object} params - The parameters for initializing the DTO.
+   * @param {number} params.id - The ID of the user.
+   * @param {string} params.firstName - The first name of the user.
+   * @param {string} params.lastName - The last name of the user.
+   * @param {string} params.username - The username of the user.
+   * @param {string} params.email - The email address of the user.
+   * @param {string} params.role - The role of the user.
+   * @param {string} params.avatar - The avatar URL of the user.
+   * @param {string} params.createdAt - The creation timestamp of the user.
+   * @param {string} params.updatedAt - The update timestamp of the user.
+   */
   constructor({
     id,
     firstName,

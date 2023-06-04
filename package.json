@@ -15,7 +15,8 @@
     "docker:push": "docker push alexandrelamberty/minerva-api:$branch",
     "lint:check": "eslint .",
     "format:check": "prettier --check .",
-    "format:format": "prettier --write **/*.{js,md}"
+    "format:format": "prettier --write **/*.{js,md}",
+    "doc": "npx jsdoc src -r --destination docs --readme ./README.md --package ./package.json"
   },
   "author": "Alexandre Lamberty <mail@alexandrelamberty.com>",
   "license": "MIT",
@@ -23,6 +24,7 @@
     "eslint": "^8.42.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.8.0",
+    "jsdoc": "^4.0.2",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.8"
   },

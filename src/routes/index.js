@@ -9,6 +9,11 @@ const teacherRouter = require("./teacher.router");
 const enrollmentRouter = require("./enrollment.router");
 const openaiRouter = require("./openai.router");
 
+/**
+ * Express router to mount our routes.
+ * @type {object}
+ * @const
+ */
 const router = require("express").Router();
 router.use("/", homeRouter);
 router.use("/auth", authRouter);

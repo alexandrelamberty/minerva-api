@@ -1,16 +1,20 @@
 const { Request, Response } = require("express");
 const authService = require("../services/auth.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 
-const homeController = {
+/**
+ * Controller for handling home route.
+ * @module controllers/homeController
+ */
+module.exports = {
   /**
-   * Show detail about the api
-   * @param { Request } req
-   * @param { Response} res
+   * Handles the home route request.
+   * @memberof module:controllers/homeController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {void}
    */
   home: async (req, res) => {
     res.status(200).json("Minerva - Training Management System API");
   },
 };
-
-module.exports = homeController;

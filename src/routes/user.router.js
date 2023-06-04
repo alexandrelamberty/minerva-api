@@ -10,7 +10,7 @@ const userRouter = require("express").Router();
 /**
  * Multer configuration for the trainings covers
  */
-const storage = require("../utils/config.multer")("avatars");
+const storage = require("../config/config.multer")("avatars");
 const upload = multer({ storage });
 
 /**

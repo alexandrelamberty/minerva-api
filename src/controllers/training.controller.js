@@ -1,17 +1,24 @@
 const { Request, Response } = require("express");
 const trainingService = require("../services/training.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
-const { deleteCover } = require("../utils/cover.fs");
+} = require("../responses/success.response");
+const { deleteCover } = require("../utils/files");
 
-const trainingController = {
+/**
+ * Controller for training-related operations.
+ * @module controllers/trainingController
+ * @see {@link module:services/training}
+ */
+module.exports = {
   /**
-   * Search Trainings
-   * @param {Request} req
-   * @param {Response} res
+   * Search for trainings based on the provided search terms.
+   * @memberof module:controllers/trainingController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   search: async (req, res) => {
     const terms = req.params.terms;
@@ -20,9 +27,11 @@ const trainingController = {
   },
 
   /**
-   * Get All Trainings
-   * @param {Request} req
-   * @param {Response} res
+   * Get all trainings with pagination.
+   * @memberof module:controllers/trainingController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getAll: async (req, res) => {
     const { offset, limit } = req.pagination;
@@ -37,9 +46,11 @@ const trainingController = {
   },
 
   /**
-   * Get a Training By Id
-   * @param {Request} req
-   * @param {Response} res
+   * Get a training by its ID.
+   * @memberof module:controllers/trainingController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getById: async (req, res) => {
     const { id } = req.params;
@@ -52,9 +63,11 @@ const trainingController = {
   },
 
   /**
-   * Create a Training
-   * @param {Request} req
-   * @param {Response} res
+   * Create a new training.
+   * @memberof module:controllers/trainingController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   create: async (req, res) => {
     console.log("createTraining");
@@ -77,9 +90,11 @@ const trainingController = {
   },
 
   /**
-   * Update a Training
-   * @param {Request} req
-   * @param {Response} res
+   * Update a training.
+   * @memberof module:controllers/trainingController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   update: async (req, res) => {
     const { id } = req.params;
@@ -104,9 +119,11 @@ const trainingController = {
   },
 
   /**
-   * Delete a Training and his associated cover file.
-   * @param {Request} req
-   * @param {Response} res
+   * Delete a training
+   * @memberof module:controllers/trainingController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   delete: async (req, res) => {
     const { id } = req.params;
@@ -133,9 +150,10 @@ const trainingController = {
   },
 
   /**
-   * Update a Training Cover
-   * @param {Request} req
-   * @param {Response} res
+   * Uploads a cover image for a training.
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   postCover: async (req, res) => {
     console.log("postCover");
@@ -147,8 +165,6 @@ const trainingController = {
       res.status(404).json(new ErrorResponse("Training not found", 404));
       return;
     }
-
-    console.log("filename: ", filename);
 
     // Success Response
     res
@@ -171,18 +187,22 @@ const trainingController = {
     const { id } = req.params;
     const filename = req.file ? req.file.filename : null;
 
+    // Retrieve the training by ID
     const training = await trainingService.getById(id);
     if (!training) {
+      // If the training is not found, send a 404 error response
       res.status(404).json(new ErrorResponse("Training not found", 404));
       return;
     }
 
-    // Delete old cover
+    // Delete the old cover image
     const cover = training.cover;
-    deleteCover(cover);
+    if (cover) deleteCover(cover);
 
+    // Update the cover image for the training
     const isUpdated = await trainingService.updateCover(id, filename);
     if (!isUpdated) {
+      // If the update fails, send a 404 error response
       res.status(404).json(new ErrorResponse("Training not found", 404));
       return;
     }
@@ -198,5 +218,3 @@ const trainingController = {
       );
   },
 };
-
-module.exports = trainingController;

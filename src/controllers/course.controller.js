@@ -1,16 +1,22 @@
 const { Request, Response } = require("express");
 const courseService = require("../services/course.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
+} = require("../responses/success.response");
 
-const courseController = {
+/**
+ * Controller for course-related operations.
+ * @module controllers/courseController
+ */
+module.exports = {
   /**
-   * Search Courses
-   * @param {Request} req
-   * @param {Response} res
+   * Search for courses based on the provided search terms.
+   * @memberof module:controllers/courseController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   search: async (req, res) => {
     const terms = req.params.terms;
@@ -19,9 +25,11 @@ const courseController = {
   },
 
   /**
-   * Get All Courses
-   * @param {Request} req
-   * @param {Response} res
+   * Get all courses with pagination.
+   * @memberof module:controllers/courseController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getAll: async (req, res) => {
     console.log("GET ALL", req.query);
@@ -38,9 +46,11 @@ const courseController = {
   },
 
   /**
-   * Get an Course By Id
-   * @param {Request} req
-   * @param {Response} res
+   * Get a course by its ID.
+   * @memberof module:controllers/courseController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getById: async (req, res) => {
     const { id } = req.params;
@@ -53,9 +63,11 @@ const courseController = {
   },
 
   /**
-   * Create a Course
-   * @param {Request} req
-   * @param {Response} res
+   * Create a new course.
+   * @memberof module:controllers/courseController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   create: async (req, res) => {
     console.log("Controller Create Course: ", req.body);
@@ -66,9 +78,11 @@ const courseController = {
   },
 
   /**
-   * Update a Course
-   * @param {Request} req
-   * @param {Response} res
+   * Update a course.
+   * @memberof module:controllers/courseController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   update: async (req, res) => {
     const { id } = req.params;
@@ -83,9 +97,11 @@ const courseController = {
   },
 
   /**
-   * Delete a Course
-   * @param {Request} req
-   * @param {Response} res
+   * Delete a course
+   * @memberof module:controllers/courseController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   delete: async (req, res) => {
     const { id } = req.params;
@@ -114,5 +130,3 @@ const courseController = {
     res.status(201).json(new SuccessResponse(dates, 201));
   },
 };
-
-module.exports = courseController;

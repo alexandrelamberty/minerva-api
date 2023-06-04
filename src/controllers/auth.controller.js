@@ -1,14 +1,20 @@
 const { Request, Response } = require("express");
 const authService = require("../services/auth.service");
-const { ErrorResponse } = require("../utils/error.response");
-const { SuccessResponse } = require("../utils/success.response");
-const jwt = require("../utils/jwt-utils");
+const { ErrorResponse } = require("../responses/error.response");
+const { SuccessResponse } = require("../responses/success.response");
+const jwt = require("../utils/jwt");
 
-const authController = {
+/**
+ * Controller for authentication-related operations.
+ * @module controllers/authController
+ */
+module.exports = {
   /**
-   * Register a new user
-   * @param { Request } req
-   * @param { Response} res
+   * Register a new user.
+   * @memberof module:controllers/authController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   register: async (req, res) => {
     const data = req.body;
@@ -20,11 +26,12 @@ const authController = {
     const token = await jwt.generate(user);
     res.status(201).json(new SuccessResponse({ token, user }, 201));
   },
-
   /**
-   * Login a user
-   * @param { Request } req
-   * @param { Response} res
+   * Login a user.
+   * @memberof module:controllers/authController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   login: async (req, res) => {
     console.log("Login");
@@ -39,13 +46,13 @@ const authController = {
   },
 
   /**
-   * Show detail about the user authentication
-   * @param { Request } req
-   * @param { Response} res
+   * Get the user's information.
+   * @memberof module:controllers/authController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {void}
    */
   whoami: async (req, res) => {
     res.status(200).json(req.user);
   },
 };
-
-module.exports = authController;
