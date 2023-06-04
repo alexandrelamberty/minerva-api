@@ -1,19 +1,22 @@
 const { Request, Response, NextFunction } = require("express");
 
 /**
- * Middleware
- * @param { { defaultLimit : number?, maxLimit : number? }? } options
- * @returns { (req : Request , res : Response , next : NextFunction ) => undefined }
+ * Middleware function for handling pagination parameters in request query.
+ * @module middlewares/pagination
+ * @param {Object} options - Configuration options.
+ * @param {number} options.defaultLimit - The default limit for pagination.
+ * @param {number} options.maxLimit - The maximum limit for pagination.
+ * @returns {Function} - Express middleware function.
  */
-const pagination = (options) => {
+module.exports = (options) => {
   const defaultLimit = options?.defaultLimit ?? 20;
   const maxLimit = options?.maxLimit ?? 50;
 
   /**
-   * Middleware Pagination
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
+   * Express middleware function for handling pagination.
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @param {Function} next - The next middleware function.
    */
   return (req, res, next) => {
     const reqOffset = parseInt(req.query.offset);
@@ -30,5 +33,3 @@ const pagination = (options) => {
     next();
   };
 };
-
-module.exports = pagination;

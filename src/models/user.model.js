@@ -5,7 +5,6 @@ const { Sequelize, ModelStatic, DataTypes } = require("sequelize");
  * @param {Sequelize} sequelize
  * @returns {ModelStatic<any>}
  */
-
 module.exports = (sequelize) => {
   const User = sequelize.define(
     "User",

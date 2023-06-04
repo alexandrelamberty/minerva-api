@@ -1,16 +1,23 @@
 const { Request, Response } = require("express");
 const teacherService = require("../services/teacher.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
+} = require("../responses/success.response");
 
-const teacherController = {
+/**
+ * Controller for teacher-related operations.
+ * @module controllers/teacherController
+ * @see {@link module:services/teacher}
+ */
+module.exports = {
   /**
-   * Search teachers
-   * @param {Request} req
-   * @param {Response} res
+   * Search for teachers based on the provided search terms.
+   * @memberof module:controllers/teacherController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   search: async (req, res) => {
     const terms = req.params.terms;
@@ -19,9 +26,11 @@ const teacherController = {
   },
 
   /**
-   * Get All Teachers
-   * @param {Request} req
-   * @param {Response} res
+   * Get all teachers with pagination.
+   * @memberof module:controllers/teacherController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getAll: async (req, res) => {
     const { offset, limit } = req.pagination;
@@ -30,9 +39,11 @@ const teacherController = {
   },
 
   /**
-   * Get a Teacher By Id
-   * @param {Request} req
-   * @param {Response} res
+   * Get a teacher by its ID.
+   * @memberof module:controllers/teacherController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getById: async (req, res) => {
     const { id } = req.params;
@@ -45,9 +56,31 @@ const teacherController = {
   },
 
   /**
-   * Update a Teacher
-   * @param {Request} req
-   * @param {Response} res
+   * Create a new teacher.
+   * @memberof module:controllers/teacherController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
+   */
+  create: async (req, res) => {
+    const data = req.body;
+    const alreadyExists = await teacherService.nameAlreadyExists(data.name);
+    if (alreadyExists) {
+      return res
+        .status(409)
+        .json(new ErrorResponse("Le nom du teacher existe déjà", 409));
+    }
+    const teacher = await teacherService.create(data);
+    res.location("/teacher/" + teacher.id);
+    res.status(201).json(new SuccessResponse(teacher, 201));
+  },
+
+  /**
+   * Update a teacher.
+   * @memberof module:controllers/teacherController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   update: async (req, res) => {
     const { id } = req.params;
@@ -61,9 +94,11 @@ const teacherController = {
   },
 
   /**
-   * Delete a Teacher
-   * @param {Request} req
-   * @param {Response} res
+   * Delete a teacher.
+   * @memberof module:controllers/teacherController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   delete: async (req, res) => {
     const { id } = req.params;
@@ -75,5 +110,3 @@ const teacherController = {
     res.sendStatus(204);
   },
 };
-
-module.exports = teacherController;

@@ -1,4 +1,5 @@
-name: Node Docker DockerHub
+name: DockerHub
+
 on:
   push:
     branches:
@@ -6,8 +7,9 @@ on:
       - "releases/**"
       - "features/**"
   pull_request:
-    branches: ["master", "stagging"]
+    branches: ["master", "staging"]
   workflow_dispatch:
+
 jobs:
   build:
     name: "Node build"

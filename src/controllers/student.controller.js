@@ -1,16 +1,22 @@
 const { Request, Response } = require("express");
 const studentService = require("../services/student.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
+} = require("../responses/success.response");
 
-const studentController = {
+/**
+ * Controller for student-related operations.
+ * @module controllers/studentController
+ */
+module.exports = {
   /**
-   * Search students
-   * @param {Request} req
-   * @param {Response} res
+   * Search for students based on the provided search terms.
+   * @memberof module:controllers/studentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   search: async (req, res) => {
     const terms = req.params.terms;
@@ -19,9 +25,11 @@ const studentController = {
   },
 
   /**
-   * Get All Students
-   * @param {Request} req
-   * @param {Response} res
+   * Get all students with pagination.
+   * @memberof module:controllers/studentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getAll: async (req, res) => {
     const { offset, limit } = req.pagination;
@@ -30,9 +38,11 @@ const studentController = {
   },
 
   /**
-   * Get a Student By Id
-   * @param {Request} req
-   * @param {Response} res
+   * Get student by its ID.
+   * @memberof module:controllers/studentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getById: async (req, res) => {
     const { id } = req.params;
@@ -45,9 +55,11 @@ const studentController = {
   },
 
   /**
-   * Update a Student
-   * @param {Request} req
-   * @param {Response} res
+   * Update student.
+   * @memberof module:controllers/studentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   update: async (req, res) => {
     const { id } = req.params;
@@ -61,9 +73,11 @@ const studentController = {
   },
 
   /**
-   * Delete a Student
-   * @param {Request} req
-   * @param {Response} res
+   * Delete student.
+   * @memberof module:controllers/studentController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   delete: async (req, res) => {
     const { id } = req.params;
@@ -75,5 +89,3 @@ const studentController = {
     res.sendStatus(204);
   },
 };
-
-module.exports = studentController;

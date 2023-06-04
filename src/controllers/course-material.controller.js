@@ -1,16 +1,22 @@
 const { Request, Response } = require("express");
 const materialService = require("../services/material.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
+} = require("../responses/success.response");
 
-const materialController = {
+/**
+ * Controller for material-related operations.
+ * @module controllers/materialController
+ */
+module.exports = {
   /**
-   * Get All Materials
-   * @param {Request} req
-   * @param {Response} res
+   * Get all materials with pagination.
+   * @memberof module:controllers/materialController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getAll: async (req, res) => {
     const { offset, limit } = req.pagination;
@@ -19,9 +25,11 @@ const materialController = {
   },
 
   /**
-   * Get a Material By Id
-   * @param {Request} req
-   * @param {Response} res
+   * Get an material by its ID.
+   * @memberof module:controllers/materialController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getById: async (req, res) => {
     const { id } = req.params;
@@ -34,9 +42,11 @@ const materialController = {
   },
 
   /**
-   * Create a Material
-   * @param {Request} req
-   * @param {Response} res
+   * Create a new course material.
+   * @memberof module:controllers/materialController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   create: async (req, res) => {
     console.log("CREATE ORDER CONTROLLER");
@@ -48,9 +58,11 @@ const materialController = {
   },
 
   /**
-   * Update a Material
-   * @param {Request} req
-   * @param {Response} res
+   * Update a course material.
+   * @memberof module:controllers/materialController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   update: async (req, res) => {
     const { id } = req.params;
@@ -64,9 +76,11 @@ const materialController = {
   },
 
   /**
-   * Delete a Material
-   * @param {Request} req
-   * @param {Response} res
+   * Delete a course material
+   * @memberof module:controllers/materialController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   delete: async (req, res) => {
     const { id } = req.params;
@@ -78,5 +92,3 @@ const materialController = {
     res.sendStatus(204);
   },
 };
-
-module.exports = materialController;
