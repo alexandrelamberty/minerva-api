@@ -13,7 +13,7 @@
     "seed:undo": "npx sequelize-cli db:seed:undo:all",
     "docker:build": "docker build . -t alexandrelamberty/bookstore-api:master",
     "docker:push": "docker push alexandrelamberty/bookstore-api:master",
-    "doc": "npx jsdoc src -r --destination docs --readme ./README.md --package ./package.json/"
+    "doc": "npx jsdoc src -r --destination docs --readme ./README.md --package ./package.json"
   },
   "author": "Alexandre Lamberty <mail@alexandrelamberty.com>",
   "license": "MIT",
