@@ -29,6 +29,7 @@ const teacherService = {
       count,
     };
   },
+
   /**
    * Retrieves a paginated list of teachers.
    * @memberof module:services/teacher
@@ -52,6 +53,7 @@ const teacherService = {
       count,
     };
   },
+
   /**
    * Retrieves teacher details by their ID.
    * @memberof module:services/teacher
@@ -67,6 +69,18 @@ const teacherService = {
       ],
     });
     return teacher ? new TeacherDTO(teacher) : null;
+  },
+
+  /**
+   * Create teacher with the provided data.
+   * @memberof module:services/s/teacher
+   * @param {*} enrollmentToAdd - The enrollment data to be added.
+   * @returns {Promise<TeacherDTO|null>} A promise that resolves to a new TeacherDTO instance representing the created teacher, or null if creation fails.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  create: async (teacherToAdd) => {
+    const teacher = await db.Teacher.create(teacherToAdd);
+    return teacher ? new TeacherDTO(student) : null;
   },
 
   /**

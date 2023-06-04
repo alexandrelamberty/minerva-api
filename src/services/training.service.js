@@ -31,6 +31,7 @@ const trainingService = {
       count,
     };
   },
+
   /**
    * Retrieve a paginated list of trainings.
    * @memberof module:services/training
@@ -52,6 +53,7 @@ const trainingService = {
       count,
     };
   },
+
   /**
    * Retrieves all trainings belonging to a specific category by category ID.
    * @memberof module:services/training
@@ -65,6 +67,7 @@ const trainingService = {
     });
     return training ? new TrainingDTO(training) : null;
   },
+
   /**
    * Retrieve the user details with the provided ID.
    * @memberof module:services/training
@@ -82,11 +85,12 @@ const trainingService = {
     });
     return training ? new TrainingDetailsDTO(training) : null;
   },
+
   /**
    * Create a training with the provided data.
    * @memberof module:services/training
-   * @param {*} trainingToAdd
-   * @returns
+   * @param {*} trainingToAdd - The training data to be added.
+   * @returns {Promise<TrainingDTO|null>} A promise that resolves to a new TrainingDTO instance representing the created training, or null if creation fails.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   create: async (trainingToAdd) => {
@@ -95,12 +99,13 @@ const trainingService = {
     console.log(training);
     return training ? new TrainingDTO(training) : null;
   },
+
   /**
    * Update training with the provided data.
    * @memberof module:services/training
    * @param {*} id - The ID of the training to update.
    * @param {*} trainingToUpdate - The updated data for the training.
-   * @returns {Promise<boolean>} - A promise that resolves once the training has been successfully updated.
+   * @returns {Promise<boolean>} -  Promise that resolves to true if the training update was successful, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   update: async (id, trainingToUpdate) => {
@@ -136,11 +141,12 @@ const trainingService = {
       return null;
     }
   },
+
   /**
    * Delete training with the provided ID.
    * @memberof module:services/training
    * @param {*} id - The ID of the training to delete.
-   * @returns {Promise<boolean>} - A promise that resolves once the training has been successfully deleted.
+   * @returns {Promise<boolean>} -  Promise that resolves to true if the training deleted was successful, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   delete: async (id) => {
@@ -149,6 +155,7 @@ const trainingService = {
     });
     return nbDeletedRow === 1;
   },
+
   /**
    * Updates the cover image for a training with the provided ID.
    * @memberof module:services/training
@@ -166,6 +173,7 @@ const trainingService = {
     });
     return updatedRow[0] === 1;
   },
+
   /**
    * Checks if a training with the provided name already exists.
    * @memberof module:services/training

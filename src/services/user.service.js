@@ -64,11 +64,23 @@ module.exports = {
   },
 
   /**
-   * Update user details.
+   * Create user with the provided data.
+   * @memberof module:services/s/student
+   * @param {*} userToAdd - The user data to be added.
+   * @returns {Promise<UserDTO|null>} A promise that resolves to a new UserDTO instance representing the created user, or null if creation fails.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  create: async (userToAdd) => {
+    const user = await db.User.create(userToAdd);
+    return user ? new UserDTO(user) : null;
+  },
+
+  /**
+   * Update user details with the provided data.
    * @memberof module:services/users
    * @param {string} userId - The ID of the user to update.
    * @param {*} userUpdate - The updated data for the user.
-   * @returns {Promise<boolean>}
+   * @returns {Promise<boolean>} - A promise that resolves to true if the user was successfully updated, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   update: async (userId, userUpdate) => {
@@ -79,10 +91,10 @@ module.exports = {
   },
 
   /**
-   * Delete a user from the system based on the provided ID.
+   * Delete user with provided ID.
    * @memberof module:services/users
    * @param {*} userId - The ID of the user to delete.
-   * @returns {Promise<boolean>}
+   * @returns {Promise<boolean>} - A promise that resolves to true if the user was successfully deleted, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   delete: async (userId) => {

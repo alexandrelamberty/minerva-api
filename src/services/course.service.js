@@ -10,8 +10,10 @@ const courseService = {
   /**
    * Search for courses based on the provided search terms.
    * @memberof module:services/course
-   * @param {*} terms
-   * @returns {Promise<CourseDTO>}
+   * @param {*} terms - The search terms to match against training name.
+   * @param {number} offset - The number of items to skip before starting to return results.
+   * @param {number} limit - The maximum number of items to return.
+   * @returns {Promise<CourseDTO[]>} A promise that resolves to an array of CourseDTO objects matching the search terms.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   search: async (terms) => {
@@ -35,7 +37,7 @@ const courseService = {
    * @memberof module:services/course
    * @param {number} offset - The number of items to skip before starting to return results.
    * @param {number} limit - The maximum number of items to return.
-   * @returns {Promise<CourseDTO>}
+   * @returns {Promise<{ students: Array<CourseDTO>, count: number }>} - A promise that resolves to an object containing an array of CourseDateDTO objects representing the course-date and the total count of teachers.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   getAll: async (offset, limit) => {
@@ -76,10 +78,10 @@ const courseService = {
   },
 
   /**
-   *
+   * Retrieve the course details with the provided ID.
    * @memberof module:services/course
-   * @param {*} id
-   * @returns {Promise<CourseDTO>}
+   * @param {*} id - The ID of the course to retrieve.
+   * @returns {Promise<CourseDTO|null>} A promise that resolves to a CourseDTO instance representing the retrieved course, or null if the course is not found.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   getById: async (id) => {
@@ -113,10 +115,10 @@ const courseService = {
   },
 
   /**
-   *
+   * Create a course with the provided data.
    * @memberof module:services/course
-   * @param {*} courseToAdd
-   * @returns {Promise<CourseDTO>}
+   * @param {*} courseToAdd - The course data to be added.
+   * @returns {Promise<CourseDTO|null>} A promise that resolves to a new CourseDTO instance representing the created course, or null if creation fails.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   create: async (courseToAdd) => {
@@ -166,7 +168,7 @@ const courseService = {
    * @memberof module:services/course
    * @param {*} id - The ID of the course to update
    * @param {*} courseDTO - The detail of the course to update
-   * @returns {Promise<boolean>}
+   * @returns {Promise<boolean>} - A promise that resolves to true if the course was successfully deleted, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   update: async (id, courseDTO) => {
@@ -220,7 +222,7 @@ const courseService = {
    * Delete course with the provided ID.
    * @memberof module:services/course
    * @param {*} courseId - The ID of the course to delete.
-   * @returns {Promise<boolean>}
+   * @returns {Promise<boolean>} - A promise that resolves to true if the course was successfully deleted, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   delete: async (courseId) => {

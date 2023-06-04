@@ -11,7 +11,7 @@ const enrollmentService = {
    * Search for enrollments based on the provided search terms.
    * @memberof module:services/s/enrollment
    * @param {*} terms - The search terms to match against training name.
-   * @returns
+   * @returns {Promise<EnrollmentDTO[]>} A promise that resolves to an array of Enrollment objects matching the search terms.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   search: async (terms) => {
@@ -30,11 +30,11 @@ const enrollmentService = {
   },
 
   /**
-   *
+   * Retrieve a list of paginated enrollment
    * @memberof module:services/s/enrollment
    * @param {number} offset - The number of items to skip before starting to return results.
    * @param {number} limit - The maximum number of items to return.
-   * @returns
+   * @returns {Promise<{ enrollments: Array<EnrollmentDTO>, count: number }>} - A promise that resolves to an object containing an array of EnrollmentDTO objects representing the enrollment and the total count of enrollments.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   getAll: async (offset, limit) => {
@@ -51,10 +51,10 @@ const enrollmentService = {
   },
 
   /**
-   *
+   * Retrieve enrollment with the provided ID.
    * @memberof module:services/s/enrollment
-   * @param {*} id
-   * @returns
+   * @param {*} id - The ID of the enrollment to retrieve.
+   * @returns {Promise<EnrollmentDTO|null>} A promise that resolves to a EnrollmentDTO instance representing the retrieved enrollment, or null if the course is not found.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   getById: async (id) => {
@@ -65,10 +65,10 @@ const enrollmentService = {
   },
 
   /**
-   *
+   * Create enrollment with the provided data.
    * @memberof module:services/s/enrollment
-   * @param {*} enrollmentToAdd
-   * @returns
+   * @param {*} enrollmentToAdd - The enrollment data to be added.
+   * @returns {Promise<EnrollmentDTO|null>} A promise that resolves to a new EnrollmentDTO instance representing the created enrollment, or null if creation fails.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   create: async (enrollmentToAdd) => {
@@ -79,11 +79,11 @@ const enrollmentService = {
   },
 
   /**
-   *
+   * Update enrollment with the provided data.
    * @memberof module:services/s/enrollment
-   * @param {*} enrollmentToUpdate
-   * @param {*} id
-   * @returns
+   * @param {*} id - The ID of the enrollment to update.
+   * @param {*} enrollmentToUpdate - The updated data for the enrollment.
+   * @returns {Promise<boolean>} - A promise that resolves to true if the enrollment was successfully updated, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   update: async (enrollmentToUpdate, id) => {
@@ -94,10 +94,10 @@ const enrollmentService = {
   },
 
   /**
-   *
+   * Deletes enrollment with the provided ID.
    * @memberof module:services/s/enrollment
-   * @param {*} id
-   * @returns
+   * @param {*} id - The ID of the enrollment to delete.
+   * @returns {Promise<boolean>} - A promise that resolves to true if the enrollment was successfully deleted, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   delete: async (id) => {

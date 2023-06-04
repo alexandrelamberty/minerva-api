@@ -31,6 +31,7 @@ const studentService = {
       count,
     };
   },
+
   /**
    * Retrieve a paginated list of students.
    * @memberof module:services/student
@@ -63,12 +64,12 @@ const studentService = {
   /**
    * Retrieve student details.
    * @memberof module:services/student
-   * @param {*} id - The ID of the student to retrieve.
+   * @param {*} studentId - The ID of the student to retrieve.
    * @returns {Promise<TeacherDTO|null>} - A promise that resolves to a StudentDTO object representing the student if found, or null if not found.
    * @throws {Error} - If the operation fails or encounters an error.
    */
-  getById: async (id) => {
-    const student = await db.Student.findByPk(id, {
+  getById: async (studentId) => {
+    const student = await db.Student.findByPk(studentId, {
       include: [
         {
           model: db.User,
@@ -78,21 +79,35 @@ const studentService = {
     });
     return student ? new StudentDTO(student) : null;
   },
+
   /**
-   * Update student details.
-   * @param {*} id - The ID of the student to update.
+   * Create student with the provided data.
+   * @memberof module:services/s/student
+   * @param {*} enrollmentToAdd - The enrollment data to be added.
+   * @returns {Promise<StudentDTO|null>} A promise that resolves to a new StudentDTO instance representing the created student, or null if creation fails.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  create: async (studentToAdd) => {
+    const student = await db.Student.create(studentToAdd);
+    return student ? new StudentDTO(student) : null;
+  },
+
+  /**
+   * Update student with the provided ID.
+   * @param {*} studentId - The ID of the student to update.
    * @param {*} studentToUpdate - The updated data for the student.
    * @returns {Promise<boolean>} - A promise that resolves once the student has been successfully updated.
    * @throws {Error} - If the operation fails or encounters an error.
    */
-  update: async (id, studentToUpdate) => {
+  update: async (studentId, studentToUpdate) => {
     const updatedRow = await db.Student.update(studentToUpdate, {
-      where: { id },
+      where: { id: studentId },
     });
     return updatedRow[0] === 1;
   },
+
   /**
-   * Delete student.
+   * Delete student with the provided ID.
    * @memberof module:services/student
    * @param {*} studentId - The ID of the student to delete.
    * @returns {Promise<boolean>} - A promise that resolves once the student has been successfully deleted.
