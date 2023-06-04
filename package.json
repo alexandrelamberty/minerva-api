@@ -2,6 +2,8 @@
   "name": "minerva-api",
   "version": "0.0.1-alpha",
   "description": "The Training Management System API is a powerful tool designed to streamline and automate the process of managing training programs within an organization.",
+  "author": "Alexandre Lamberty <mail@alexandrelamberty.com>",
+  "license": "MIT",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
@@ -11,13 +13,20 @@
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
     "seed:all": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo:all",
-    "docker:build": "docker build . -t alexandrelamberty/bookstore-api:master",
-    "docker:push": "docker push alexandrelamberty/bookstore-api:master"
+    "docker:build": "docker build . -t alexandrelamberty/minerva-api:'${branch}'",
+    "docker:push": "docker push alexandrelamberty/minerva-api:$branch",
+    "lint:check": "eslint .",
+    "format:check": "prettier --check .",
+    "format:format": "prettier --write **/*.{js,md}",
+    "doc": "npx jsdoc src -r --destination docs --readme ./README.md --package ./package.json"
   },
-  "author": "Alexandre Lamberty <mail@alexandrelamberty.com>",
-  "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "eslint": "^8.42.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.8.0",
+    "jsdoc": "^4.0.2",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.8"
   },
   "dependencies": {
     "argon2": "^0.30.3",

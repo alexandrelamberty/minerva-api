@@ -2,6 +2,8 @@
 public/
 public/*
 
+# Docs
+docs/
 # Logs
 logs
 *.log

@@ -1,18 +1,24 @@
 const { Request, Response } = require("express");
 const categoryService = require("../services/training-category.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
+} = require("../responses/success.response");
 
-const { deleteCover } = require("../utils/cover.fs");
+const { deleteCover } = require("../utils/files");
 
-const categoryController = {
+/**
+ * Controller for category-related operations.
+ * @module controllers/categoryController
+ */
+module.exports = {
   /**
-   * Search Categories
-   * @param {Request} req
-   * @param {Response} res
+   * Search for categorys based on the provided search terms.
+   * @memberof module:controllers/categoryController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   search: async (req, res) => {
     const { terms } = req.params;
@@ -21,9 +27,11 @@ const categoryController = {
   },
 
   /**
-   * Get All Categories
-   * @param {Request} req
-   * @param {Response} res
+   * Get all categorys with pagination.
+   * @memberof module:controllers/categoryController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getAll: async (req, res) => {
     const { offset, limit } = req.pagination;
@@ -32,9 +40,11 @@ const categoryController = {
   },
 
   /**
-   * Get a Category By Id
-   * @param {Request} req
-   * @param {Response} res
+   * Get a category by its ID.
+   * @memberof module:controllers/categoryController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getById: async (req, res) => {
     const { id } = req.params;
@@ -47,9 +57,11 @@ const categoryController = {
   },
 
   /**
-   * Create a Category
-   * @param {Request} req
-   * @param {Response} res
+   * Create a new category.
+   * @memberof module:controllers/categoryController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   create: async (req, res) => {
     const data = req.body;
@@ -68,9 +80,11 @@ const categoryController = {
   },
 
   /**
-   * Update a Category
-   * @param {Request} req
-   * @param {Response} res
+   * Update a category.
+   * @memberof module:controllers/categoryController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   update: async (req, res) => {
     const { id } = req.params;
@@ -87,9 +101,11 @@ const categoryController = {
   },
 
   /**
-   * Delete a Category
-   * @param {Request} req
-   * @param {Response} res
+   * Delete a category.
+   * @memberof module:controllers/categoryController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   delete: async (req, res) => {
     const { id } = req.params;
@@ -100,7 +116,7 @@ const categoryController = {
       return;
     }
 
-    // Retrieve the training cover
+    // Retrieve the category cover
     const cover = category.cover;
 
     const isDeleted = await categoryService.delete(id);
@@ -175,5 +191,3 @@ const categoryController = {
       );
   },
 };
-
-module.exports = categoryController;

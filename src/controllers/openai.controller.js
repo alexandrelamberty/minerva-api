@@ -1,16 +1,22 @@
 const { Request, Response } = require("express");
 const openaiService = require("../services/openai.service");
-const { ErrorResponse } = require("../utils/error.response");
+const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
+} = require("../responses/success.response");
 
-const openaiController = {
+/**
+ * Controller for ai-related operations.
+ * @module controllers/aiController
+ */
+module.exports = {
   /**
-   * Suggest a category name
-   * @param {Request} req
-   * @param {Response} res
+   * Suggest a category name.
+   * @memberof module:controllers/aiController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   suggestCategory: async (req, res) => {
     const response = await openaiService.suggestCategoryName();
@@ -22,9 +28,11 @@ const openaiController = {
   },
 
   /**
-   * Describe a category name
-   * @param {Request} req
-   * @param {Response} res
+   * Suggest a description for a category name.
+   * @memberof module:controllers/aiController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   describeCategory: async (req, res) => {
     const terms = req.body.terms;
@@ -38,8 +46,10 @@ const openaiController = {
 
   /**
    * Suggest a training name
-   * @param {Request} req
-   * @param {Response} res
+   * @memberof module:controllers/aiController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   suggestTraining: async (req, res) => {
     const response = await openaiService.suggestTrainingName();
@@ -52,8 +62,10 @@ const openaiController = {
 
   /**
    * Describe a training name
-   * @param {Request} req
-   * @param {Response} res
+   * @memberof module:controllers/aiController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   describeTraining: async (req, res) => {
     const terms = req.body.terms;
@@ -67,8 +79,10 @@ const openaiController = {
 
   /**
    * Generate a thumbnail
-   * @param {Request} req
-   * @param {Response} res
+   * @memberof module:controllers/aiController
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   thumbnail: async (req, res) => {
     const terms = req.body.category;
@@ -80,5 +94,3 @@ const openaiController = {
     res.status(200).json(description);
   },
 };
-
-module.exports = openaiController;

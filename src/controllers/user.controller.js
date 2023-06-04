@@ -1,16 +1,20 @@
 const { Request, Response } = require("express");
 const userService = require("../services/user.service");
-const { ErrorResponse } = require("../utils/error.response");
 const {
   SuccessArrayResponse,
   SuccessResponse,
-} = require("../utils/success.response");
+} = require("../responses/success.response");
 
-const userController = {
+/**
+ * Controller for user-related operations.
+ * @module controllers/userController
+ */
+module.exports = {
   /**
-   * Search Users
-   * @param {Request} req
-   * @param {Response} res
+   * Searches for users based on the provided search terms.
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   search: async (req, res) => {
     const terms = req.params.terms;
@@ -19,9 +23,10 @@ const userController = {
   },
 
   /**
-   * Get All Users
-   * @param {Request} req
-   * @param {Response} res
+   * Retrieves a list of users with pagination support.
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getAll: async (req, res) => {
     const { offset, limit } = req.pagination;
@@ -30,9 +35,10 @@ const userController = {
   },
 
   /**
-   * Get a User By Id
-   * @param {Request} req
-   * @param {Response} res
+   * Retrieves a user by their ID.
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   getById: async (req, res) => {
     const { id } = req.params;
@@ -52,9 +58,10 @@ const userController = {
   },
 
   /**
-   * Update a User
-   * @param {Request} req
-   * @param {Response} res
+   * Updates a user's information.
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
   update: async (req, res) => {
     const { id } = req.params;
@@ -68,10 +75,12 @@ const userController = {
   },
 
   /**
-   * Delete a User
-   * @param {Request} req
-   * @param {Response} res
+   * Deletes a user by their ID.
+   * @param {Request} req - The request object.
+   * @param {Response} res - The response object.
+   * @returns {Promise<void>}
    */
+
   delete: async (req, res) => {
     const { id } = req.params;
     const deleted = await userService.delete(id);
@@ -82,5 +91,3 @@ const userController = {
     res.sendStatus(204);
   },
 };
-
-module.exports = userController;

@@ -1,5 +1,14 @@
 const yup = require("yup");
 
+/**
+ * Module for validating enrollment data using Yup.
+ * @module validators/trainingValidators
+ * @requires yup
+ */
+
+/**
+ * Define the validation schema for creating an training.
+ */
 const createTrainingValidator = yup.object({
   name: yup.string().required().trim(),
   TrainingCategoryId: yup.number().integer().positive().required(),
@@ -17,6 +26,9 @@ const createTrainingValidator = yup.object({
   //   .min(1),
 });
 
+/**
+ * Define the validation schema for updating a training.
+ */
 const updateTrainingValidator = yup.object({
   name: yup.string().trim(),
   TrainingCategoryId: yup.number().integer().positive(),

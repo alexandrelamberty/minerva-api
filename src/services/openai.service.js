@@ -58,13 +58,16 @@ const logError = (error) => {
 };
 
 /**
- * Service that use the OpenAI API
- * https://platform.openai.com/docs/introduction
+ * Service that use A.I. to help generate content.
+ * @module service/ai
+ * @see {@link https://platform.openai.com/docs/introduction|Test}
  */
-const openaiService = {
+const aiService = {
   /**
-   * Use the Completion API to suggest a category name.
-   * @returns
+   * Suggests a category name for a training in I.T.
+   * @memberof module:services/ai
+   * @returns {Promise<{ suggestion: string }>} A promise that resolves to an object containing the suggested category name.
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   suggestCategoryName: async () => {
     const prompt =
@@ -91,8 +94,10 @@ const openaiService = {
   },
 
   /**
-   * Use the Completion API to suggest a description for category name .
-   * @returns
+   * Generates a description for an Information Technology category for trainings.
+   * @memberof module:services/ai
+   * @returns {Promise<{ description: string }>} A promise that resolves to an object containing the description for the category name.
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   describeCategory: async (terms) => {
     const prompt =
@@ -120,12 +125,14 @@ const openaiService = {
   },
 
   /**
-   * Use the Completion API to suggest a training name.
-   * @returns
+   * Generates a suggestion for a training name in the field of Information Technology.
+   * @memberof module:services/ai
+   * @returns {Promise<{ suggestion: string }>} A promise that resolves to an object containing the suggested training name.
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   suggestTrainingName: async () => {
     const prompt =
-      "Could you suggest me a training name for a training in I.T. Respond with only the category name.";
+      "Could you suggest a training name for a training in I.T. Respond with only the category name.";
 
     try {
       const response = await openai.createCompletion({
@@ -140,7 +147,7 @@ const openaiService = {
       console.log(response.data);
       const text = response.data.choices[0].text;
       return {
-        description: text,
+        suggestion: text,
       };
     } catch (error) {
       logError(error);
@@ -148,12 +155,14 @@ const openaiService = {
   },
 
   /**
-   * Use the Completion API to suggest a description for training name .
-   * @returns
+   * Generates a description for a training name in the field of Information Technology.
+   * @memberof module:services/ai
+   * @returns {Promise<{ description: string }>} A promise that resolves to an object containing the description for the training name.
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   describeTraining: async (terms) => {
     const prompt =
-      "Can you describe this information and technology category for trainings : ";
+      "Can you describe this information and technology training : ";
     try {
       const response = await openai.createCompletion({
         model: "text-davinci-003",
@@ -176,8 +185,11 @@ const openaiService = {
   },
 
   /**
-   * Use the Images API to suggest a description for training name .
-   * @returns
+   * Generates thumbnail images.
+   * @memberof module:services/ai
+   * @param {string} terms - Additional terms to refine the image search.
+   * @returns {Promise<{ images: Object[] }>} A promise that resolves to an object containing the generated thumbnail images.
+   * @throws {Error} - If the operation fails or encounters an error.
    */
   thumbnail: async (terms) => {
     const prompt = "Image about programming";
@@ -200,4 +212,4 @@ const openaiService = {
   },
 };
 
-module.exports = openaiService;
+module.exports = aiService;
