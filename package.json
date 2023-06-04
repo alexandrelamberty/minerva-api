@@ -14,7 +14,8 @@
     "docker:build": "docker build . -t alexandrelamberty/minerva-api:'${branch}'",
     "docker:push": "docker push alexandrelamberty/minerva-api:$branch",
     "lint:check": "eslint .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "format:format": "prettier --write **/*.{js,md}"
   },
   "author": "Alexandre Lamberty <mail@alexandrelamberty.com>",
   "license": "MIT",
