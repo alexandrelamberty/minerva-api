@@ -72,10 +72,17 @@ const enrollmentService = {
    * @throws {Error} - If the operation fails or encounters an error.
    */
   create: async (enrollmentToAdd) => {
-    console.log(enrollmentToAdd);
-    const enrollment = await db.Enrollment.create(enrollmentToAdd);
-    console.log(enrollment);
-    return enrollment ? new EnrollmentDTO(enrollment) : null;
+    const { StudentId, TrainingId } = enrollmentToAdd;
+    // TODO: Check no enrollment with the same training for a student
+    const enrollmentExist = await db.Enrollment.findOne({
+      where: { StudentId: StudentId, TrainingId: TrainingId },
+    });
+    if (!enrollmentExist) {
+      const enrollment = await db.Enrollment.create(enrollmentToAdd);
+      console.log(enrollment);
+      return enrollment ? new EnrollmentDTO(enrollment) : null;
+    }
+    return null;
   },
 
   /**

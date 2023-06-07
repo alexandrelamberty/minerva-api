@@ -1,5 +1,6 @@
 const { Request, Response } = require("express");
 const enrollmentService = require("../services/enrollment.service");
+const trainingService = require("../services/training.service");
 const { ErrorResponse } = require("../responses/error.response");
 const {
   SuccessArrayResponse,
@@ -74,14 +75,13 @@ const enrollmentController = {
    * @returns {Promise<void>}
    */
   create: async (req, res) => {
-    const { id } = req.params;
     const data = req.body;
-    const updated = await enrollmentService.create(data, id);
-    if (!updated) {
-      res.sendStatus(404);
+    const enrollment = await enrollmentService.create(data);
+    if (!enrollment) {
+      res.status(404).json("Already enrolled for this training");
       return;
     }
-    res.sendStatus(204);
+    res.status(200).json(new SuccessResponse(enrollment));
   },
 
   /**
@@ -92,13 +92,34 @@ const enrollmentController = {
    * @returns {Promise<void>}
    */
   update: async (req, res) => {
-    const { id } = req.params;
-    const data = req.body;
-    const updated = await enrollmentService.update(data, id);
-    if (!updated) {
-      res.sendStatus(404);
-      return;
+    const { enrollmentId } = req.params; // Enrollment id
+    const { validated, studentId, trainingId } = req.body;
+    console.log(
+      "> Enrollment update: ",
+      enrollmentId,
+      validated,
+      studentId,
+      trainingId
+    );
+
+    // Update the enrollment
+    const enrollment = await enrollmentService.update(
+      {
+        validated: validated,
+        status: "approved",
+      },
+      enrollmentId
+    );
+
+    // If the enrollment is validated we add the student to the training
+    if (validated) {
+      const added = await trainingService.addStudent(studentId, trainingId);
+      if (!added) {
+        res.sendStatus(404);
+        return;
+      }
     }
+
     res.sendStatus(204);
   },
 

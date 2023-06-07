@@ -177,13 +177,61 @@ const trainingService = {
   /**
    * Checks if a training with the provided name already exists.
    * @memberof module:services/training
-   * @param {*} name - The name of the training to check for existence.
+   * @param {string} name - The name of the training to check for existence.
    * @returns {Promise<boolean>} - A promise that resolves to true if a training with the provided name already exists, or false otherwise.
    * @throws {Error} - If the operation fails or encounters an error.
    */
   nameAlreadyExists: async (name) => {
     const training = await db.Training.findOne({ where: { name } });
     return training ? true : false;
+  },
+
+  /**
+   * Add a student to training.
+   * @memberof module:services/training
+   * @param {string} studentId - The ID of the student to add.
+   * @param {string} teacherId - The ID of the training.
+   * @returns {Promise<boolean>} -  Promise that resolves to true if the student was added successfully, or false otherwise.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  addStudent: async (studentId, trainingId) => {
+    const student = await db.Student.findByPk(studentId);
+    if (!student) return false;
+    const training = await db.Training.findByPk(trainingId);
+    if (!training) return false;
+
+    // console.log(student);
+    // console.log(training);
+
+    // Add the student to the training
+    const mixins = await training.addStudent(student);
+    console.log(mixins);
+
+    return true;
+  },
+
+  /**
+   * Remove student from training.
+   * @memberof module:services/training
+   * @param {*} studentId - The ID of the student to be removed.
+   * @param {*} trainingId - @param {string} trainingId - The ID of the training from which the student will be removed.
+   * @returns {Promise<boolean>} -  A Promise that resolves to true if the student removal was successful, or false otherwise.
+   * @throws {Error} - If the operation fails or encounters an error.
+   */
+  removeStudent: async (studentId, trainingId) => {
+    const student = await db.Student.findByPk(studentId);
+    if (!student) return false;
+    const training = await db.Training.findByPk(trainingId);
+    if (!training) return false;
+
+    console.log(student);
+    console.log(training);
+
+    // Add the student to the training
+    const mixins = await training.removeStudent(student);
+    console.log(mixins);
+
+    return true;
   },
 };
 

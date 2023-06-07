@@ -27,7 +27,7 @@ enrollmentRouter.route("/").get(pagination(), enrollmentController.getAll).post(
  * Read, Update and Delete enrollment
  */
 enrollmentRouter
-  .route("/:id")
+  .route("/:enrollmentId")
   .get(enrollmentController.getById)
   .put(
     // authJwt(["Admin"]),

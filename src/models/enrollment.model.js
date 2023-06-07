@@ -18,6 +18,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(45),
         allowNull: false,
         defaultValue: "pending",
+        validate: {
+          notNull: true,
+          notEmpty: true,
+          isIn: [["pending", "approved", "rejected"]],
+        },
       },
     },
     {

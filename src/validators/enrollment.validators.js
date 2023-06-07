@@ -18,8 +18,9 @@ const createEnrollmentValidator = yup.object({
  * Define the validation schema for updating a course.
  */
 const updateEnrollmentValidator = yup.object({
-  StudentId: yup.string().required().trim(),
-  TrainingId: yup.string().required().trim(),
+  studentId: yup.string().required().trim(),
+  trainingId: yup.string().required().trim(),
+  validated: yup.boolean().required(),
 });
 
 module.exports = { createEnrollmentValidator, updateEnrollmentValidator };
