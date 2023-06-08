@@ -82,7 +82,7 @@ db.Student.hasMany(db.Enrollment);
 db.Student.belongsToMany(db.Training, { through: "MM_Student_Training" });
 db.Student.belongsToMany(db.CourseDate, {
   through: db.CourseDateAttendance,
-  foreignKey: "StudentId",
+  foreignKey: "satudentId",
 });
 
 // Enrollment

@@ -59,7 +59,7 @@ const enrollmentService = {
    */
   getById: async (id) => {
     const enrollment = await db.Enrollment.findByPk(id, {
-      // include:
+      include: [db.Student, db.Training],
     });
     return enrollment ? new EnrollmentDTO(enrollment) : null;
   },

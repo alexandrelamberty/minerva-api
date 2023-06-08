@@ -93,29 +93,36 @@ const enrollmentController = {
    */
   update: async (req, res) => {
     const { enrollmentId } = req.params; // Enrollment id
-    const { validated, studentId, trainingId } = req.body;
-    console.log(
-      "> Enrollment update: ",
-      enrollmentId,
-      validated,
-      studentId,
-      trainingId
-    );
+    const { status } = req.body;
+    console.log("> Enrollment update: ", enrollmentId, status);
 
-    // Update the enrollment
-    const enrollment = await enrollmentService.update(
+    // Retrieves enrollment
+    const enrollment = await enrollmentService.getById(enrollmentId);
+    if (!enrollment) {
+      res.sendStatus(404).json("Enrollment not found");
+      return;
+    }
+
+    // Updates enrollment
+    const updated = await enrollmentService.update(
       {
-        validated: validated,
-        status: "approved",
+        status: status,
       },
       enrollmentId
     );
+    if (!updated) {
+      res.sendStatus(404).json("Update failed");
+      return;
+    }
 
     // If the enrollment is validated we add the student to the training
-    if (validated) {
-      const added = await trainingService.addStudent(studentId, trainingId);
+    if (status === "approved") {
+      const added = await trainingService.addStudent(
+        enrollment.student.id,
+        enrollment.training.id
+      );
       if (!added) {
-        res.sendStatus(404);
+        res.sendStatus(404).json("Add Student failed");
         return;
       }
     }

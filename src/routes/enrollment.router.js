@@ -29,7 +29,7 @@ enrollmentRouter.route("/").get(pagination(), enrollmentController.getAll).post(
 enrollmentRouter
   .route("/:enrollmentId")
   .get(enrollmentController.getById)
-  .put(
+  .patch(
     // authJwt(["Admin"]),
     bodyValidation(updateEnrollmentValidator),
     enrollmentController.update
