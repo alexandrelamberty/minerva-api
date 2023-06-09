@@ -38,7 +38,7 @@ To change the database see <https://sequelize.org/docs/v6/getting-started/> for 
 
 Create an `.env` file and add the following environment variables and fill accordingly with the database configuration. The rest of the configuration work as it is in development.
 
-For the OpenAI key you will need an account, go to: [OpenAI Signup](https://platform.openai.com/signup?launch)
+For the OpenAI key you will need an account, go to: [OpenAI Sign-up](https://platform.openai.com/signup?launch)
 
 ```properties
 API_PORT=3000
@@ -55,7 +55,7 @@ JWT_AUDIENCE=web-minerva
 OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
 ```
 
-### Docker
+### Docker service
 
 To use the provided Docker service refer to the main project [Minerva](https://github.com/alexandrelamberty/minerva).
 
