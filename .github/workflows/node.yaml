@@ -1,5 +1,11 @@
 name: Node
 
+# This GitHub Action sets up a workflow to build a Node.js application.
+# It triggers on pushes to specific branches and pull requests to master and
+# staging branches. It runs on the latest version of Ubuntu. The build job
+# uses different Node versions specified in the matrix to install dependencies
+# and run the build command.
+
 on:
   push:
     branches:

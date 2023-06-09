@@ -1,5 +1,12 @@
 name: DockerHub
 
+# This GitHub Action builds and pushes the Docker image to DockerHub.
+# It triggers on pushes to specific branches and pull requests to master and
+# staging branches. It runs on the latest version of Ubuntu. The build job
+# compiles the Node.js application using different Node versions specified in
+# the matrix. The Docker job depends on the build job and performs the Docker
+# build and push operations.
+
 on:
   push:
     branches:
