@@ -103,6 +103,8 @@ npm run seed:undo
 
 ## Tests
 
+> // TODO: Implement section
+
 ## Docker
 
 Build the image.
@@ -113,7 +115,7 @@ docker build . -t alexandrelamberty/minerva-api:tag
 
 Run the image with the default network and storage.
 
-// FIXME: add storage reference from stack
+> // FIXME: add storage reference from stack
 
 ```shell
 docker run -p 3000:3000 --network=minerva_default --mount source=media_data,target=/usr/src/app/public --env-file .env.dev --name minerva-api -d alexandrelamberty/minerva-api:tag

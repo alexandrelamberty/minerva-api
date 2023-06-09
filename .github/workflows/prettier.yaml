@@ -5,6 +5,7 @@ name: Formatting
 # staging branches. It runs on the latest version of Ubuntu. The formatting
 # job checks out the code and uses the creyD/prettier_action@v4.3 action to
 # prettify the code files.
+
 on:
   push:
     branches:
