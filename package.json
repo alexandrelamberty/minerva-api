@@ -13,8 +13,6 @@
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
     "seed:all": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo:all",
-    "docker:build": "docker build . -t alexandrelamberty/minerva-api:'${branch}'",
-    "docker:push": "docker push alexandrelamberty/minerva-api:$branch",
     "lint": "eslint src --ext js --report-unused-disable-directives --max-warnings 0",
     "format:check": "prettier --check .",
     "format:format": "prettier --write **/*.{js,md}",
