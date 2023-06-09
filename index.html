@@ -51,28 +51,34 @@
         <article><p><a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg" alt="Build"></a>
 <a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml/badge.svg" alt="Linting"></a>
 <a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml/badge.svg" alt="Formatting"></a>
+<a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml/badge.svg" alt="Documentation"></a>
 <a href="https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml"><img src="https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml/badge.svg" alt="Docker"></a>
 <a href="https://hub.docker.com/r/alexandrelamberty/minerva-api"><img src="https://img.shields.io/badge/DockerHub-images-important.svg?logo=Docker" alt="DockerHub"></a></p>
 <h1>Minerva - Training Management System API</h1>
-<p>The Minerva API is a powerful tool designed to streamline and automate the process of managing training programs within an organization. It provides a comprehensive set of endpoints that allow developers to integrate and interact with the Training Management System seamlessly.</p>
-<h2>Key Features</h2>
+<p>This repository contains the source code and documentation for a Training Management System API, designed to serve as the backend for the <a href="https://github.com/alexandrelamberty/minerva-web-app">Minerva Web Application</a>.</p>
+<p>It provide the necessary endpoints to manage training programs and related entities.</p>
+<blockquote>
+<p>This repository is part of the <a href="https://github.com/alexandrelamberty/minerva">Minerva</a> project.</p>
+</blockquote>
+<h2>Features</h2>
 <ul>
 <li><strong>User Management</strong>: Easily manage user profiles, including creation, modification, and authentication, ensuring secure access to the system.</li>
 <li><strong>Training Management</strong>: Efficiently create, update, and retrieve training information, including descriptions, category, courses, trainer.</li>
-<li><strong>Course Management</strong>: Efficiently create, update, and retrieve course information, including descriptions, schedules, trainer.</li>
+<li><strong>Course Management</strong>: Efficiently create, update, and retrieve course information, including descriptions, schedules, materials, trainer.</li>
 <li><strong>Enrollment</strong>: Enable users to enroll in specific courses, track their progress, and receive notifications for upcoming sessions.</li>
 <li><strong>Progress Tracking</strong>: Keep tabs on individual learner progress, track completion rates, and generate insightful reports on training performance.</li>
 <li><strong>Notifications</strong>: Automate communication with users by sending notifications about course updates, enrollment confirmations, and upcoming sessions.</li>
 <li><strong>Permissions and Roles</strong>: Assign different access levels and roles to users, enabling fine-grained control over the system's functionality.</li>
 </ul>
+<p>For the full set of features refer to the API [documentation](See the <a href="https://github.com/alexandrelamberty/minerva">Minerva</a> project.).</p>
 <h2>Usage</h2>
-<blockquote>
-<p>This API is part of the <a href="https://github.com/alexandrelamberty/minerva">Minerva</a> project.</p>
-</blockquote>
+<p>See the <a href="https://github.com/alexandrelamberty/minerva">Minerva</a> project.</p>
 <h2>Development</h2>
-<p>To start the API without launching the complete stack, a MySQL database is needed.
-To change the database see <a href="https:%5C/%5C/sequelize.org/docs/v6/getting-started/">https://sequelize.org/docs/v6/getting-started/</a> for the sequelize drivers available. After installation change the dialect in <code>src/models/index.js</code> and <code>config/config.js</code>.</p>
+<p>This backend relies on a running MySQL database to function. You can either use your own instance of a MySQL database or use a Docker service that provide that.</p>
+<p>To change the database see <a href="https:%5C/%5C/sequelize.org/docs/v6/getting-started/">https://sequelize.org/docs/v6/getting-started/</a> for the sequelize drivers available. After installation change the dialect in <code>src/models/index.js</code> and <code>config/config.js</code>.</p>
+<h3>Standalone database</h3>
 <p>Create an <code>.env</code> file and add the following environment variables and fill accordingly with the database configuration. The rest of the configuration work as it is in development.</p>
+<p>For the OpenAI key you will need an account, go to: <a href="https://platform.openai.com/signup?launch">OpenAI Sign-up</a></p>
 <pre class="prettyprint source lang-properties"><code>API_PORT=3000
 DB_SERVER=localhost
 DB_ROOT_PASSWORD=localhost
@@ -86,6 +92,9 @@ JWT_ISSUER=minerva
 JWT_AUDIENCE=web-minerva
 OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
 </code></pre>
+<h3>Docker service</h3>
+<p>To use the provided Docker service refer to the main project <a href="https://github.com/alexandrelamberty/minerva">Minerva</a>.</p>
+<h3>Usages</h3>
 <p>Start the application in watch mode</p>
 <pre class="prettyprint source lang-shell"><code>npm run star:dev
 </code></pre>
@@ -107,18 +116,24 @@ OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
 <pre class="prettyprint source lang-shell"><code>npm run seed:undo
 </code></pre>
 <h2>Tests</h2>
-<h2>Documentation</h2>
+<blockquote>
+<p>// TODO: Implement section</p>
+</blockquote>
 <h2>Docker</h2>
 <p>Build the image.</p>
 <pre class="prettyprint source lang-shell"><code>docker build . -t alexandrelamberty/minerva-api:tag
 </code></pre>
 <p>Run the image with the default network and storage.</p>
+<blockquote>
 <p>// FIXME: add storage reference from stack</p>
+</blockquote>
 <pre class="prettyprint source lang-shell"><code>docker run -p 3000:3000 --network=minerva_default --mount source=media_data,target=/usr/src/app/public --env-file .env.dev --name minerva-api -d alexandrelamberty/minerva-api:tag
 </code></pre>
 <p>Push image to DockerHub</p>
 <pre class="prettyprint source lang-shell"><code>docker push alexandrelamberty/minerva-api:tag
 </code></pre>
+<h2>Documentation</h2>
+<h2>Linting, Formatting and Spelling</h2>
 <h2>References</h2>
 <ul>
 <li><a href="https:%5C/%5C/expressjs.com/">https://expressjs.com/</a></li>
@@ -143,7 +158,7 @@ OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Thu Jun 08 2023 14:56:56 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Fri Jun 09 2023 13:38:02 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
