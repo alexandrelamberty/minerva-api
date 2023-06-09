@@ -1,6 +1,7 @@
 [![Build](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/node.yaml)
 [![Linting](https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/eslint.yaml)
 [![Formatting](https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/prettier.yaml)
+[![Documentation](https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/jsdoc.yaml)
 [![Docker](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api/actions/workflows/docker.yaml)
 [![DockerHub](https://img.shields.io/badge/DockerHub-images-important.svg?logo=Docker)](https://hub.docker.com/r/alexandrelamberty/minerva-api)
 
