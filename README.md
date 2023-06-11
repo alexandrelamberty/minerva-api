@@ -25,6 +25,19 @@ It provide the necessary endpoints to manage training programs and related entit
 
 For the full set of features refer to the API [documentation](See the [Minerva](https://github.com/alexandrelamberty/minerva) project.).
 
+## Technologies
+
+- [Node.js](https://nodejs.org/en)
+- [Express.js](https://expressjs.com/)
+- [Sequelize](https://sequelize.org/)
+- [OpenAI API](https://platform.openai.com/docs/api-reference)
+- [JSON Web Token](https://www.npmjs.com/package/jsonwebtoken)
+
+## Requirements
+
+- [Docker](https://www.docker.com/)
+- [NPM](https://www.npmjs.com/package/jsonwebtoken)
+
 ## Usage
 
 See the [Minerva](https://github.com/alexandrelamberty/minerva) project.
@@ -130,7 +143,23 @@ docker push alexandrelamberty/minerva-api:tag
 
 ## Documentation
 
+```shell
+npm run doc
+```
+
 ## Linting, Formatting and Spelling
+
+```shell
+npm run lint
+```
+
+```shell
+npm run format
+```
+
+```shell
+npm run spell
+```
 
 ## References
 
