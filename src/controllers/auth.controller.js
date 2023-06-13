@@ -1,8 +1,10 @@
 const { Request, Response } = require("express");
 const authService = require("../services/auth.service");
+const userService = require("../services/user.service");
 const { ErrorResponse } = require("../responses/error.response");
 const { SuccessResponse } = require("../responses/success.response");
 const jwt = require("../utils/jwt");
+const mailService = require("../services/mail.service");
 
 /**
  * Controller for authentication-related operations.
@@ -34,7 +36,6 @@ module.exports = {
    * @returns {Promise<void>}
    */
   login: async (req, res) => {
-    console.log("Login");
     const { email, password } = req.body;
     const user = await authService.login(email, password);
     if (!user) {
@@ -42,6 +43,21 @@ module.exports = {
       return;
     }
     const token = await jwt.generate(user);
+    res.status(200).json(new SuccessResponse({ token, user }));
+  },
+
+  resetPassword: async (req, res) => {
+    const email = req.params.email;
+    const user = await userService.findByEmail(email);
+    if (!user) {
+      res.status(400).json(new ErrorResponse("No user with this email!"));
+      return;
+    }
+    const send = mailService.sendMail(email);
+    if (!send) {
+      res.status(400).json(new ErrorResponse("Email error"));
+      return;
+    }
     res.status(200).json(new SuccessResponse({ token, user }));
   },
 
