@@ -25,6 +25,10 @@ It provide the necessary endpoints to manage training programs and related entit
 
 For the full set of features refer to the API [documentation](See the [Minerva](https://github.com/alexandrelamberty/minerva) project.).
 
+## Technologies
+
+## Requirements
+
 ## Usage
 
 See the [Minerva](https://github.com/alexandrelamberty/minerva) project.
@@ -54,6 +58,8 @@ JWT_EXPIRE=1d
 JWT_ISSUER=minerva
 JWT_AUDIENCE=web-minerva
 OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
+EMAIL_GMAIL=alexandrelamberty@gmail.com
+EMAIL_GMAIL_PWD=xahfybutpobjfdcp
 ```
 
 ### Docker service
@@ -129,6 +135,8 @@ docker push alexandrelamberty/minerva-api:tag
 ```
 
 ## Documentation
+
+xahfybutpobjfdcp
 
 ## Linting, Formatting and Spelling
 
