@@ -8,6 +8,7 @@ const studentRouter = require("./student.router");
 const teacherRouter = require("./teacher.router");
 const enrollmentRouter = require("./enrollment.router");
 const openaiRouter = require("./openai.router");
+const mailRouter = require("./mail.router");
 
 /**
  * Express router to mount our routes.
@@ -25,5 +26,6 @@ router.use("/categories", categoryRouter);
 router.use("/trainings", trainingRouter);
 router.use("/courses", courseRouter);
 router.use("/ai", openaiRouter);
+router.use("/mail", mailRouter);
 
 module.exports = router;
