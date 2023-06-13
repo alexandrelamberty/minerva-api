@@ -1,0 +1,72 @@
+<!--
+
+  Handlebars mail template.
+
+
+  Context:
+
+  context: {
+    name: John Doe,
+    verificationUrl:
+      "https://domain.com/account-validation/e3a428761227ba4c3c4c6946cca7204b",
+  },
+
+-->
+<html>
+  <head>
+    <title>Welcome to Minerva!</title>
+  </head>
+  <body>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="600"
+    >
+      {{> emailHeader }}
+      <tr>
+        <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td
+                style="color: #555555; font-family: Arial, sans-serif; font-size: 24px;"
+              >
+                Welcome to Minerva!
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="padding: 20px 0 30px 0; color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;"
+              >
+                Dear
+                {{name}},
+                <br /><br />
+                Thank you for registering an account with Minerva. We're excited
+                to have you join our community!
+                <br /><br />
+                To get started, please click on the verification link below to
+                confirm your email address:
+                <br /><br />
+                <a href="{{verificationUrl}}">{{verificationUrl}}</a>
+                <br /><br />
+                By clicking the link, you will complete the registration process
+                and gain full access to your Minerva account.
+                <br /><br />
+                If you did not create this account or believe this email was
+                sent to you in error, please ignore it.
+                <br /><br />
+                We look forward to seeing you on Minerva!
+                <br /><br />
+                Best regards,
+                <br />
+                The Minerva Support Team
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      {{> emailFooter }}
+    </table>
+  </body>
+</html>

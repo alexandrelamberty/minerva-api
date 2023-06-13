@@ -1,0 +1,99 @@
+<!--
+
+  Handlebars mail template.
+
+  Context:
+
+  context: {
+    name: John Doe,
+    trainingName: "Full Stack Web Development",
+    duration: 200,
+    startDate: "2023-01-01",
+    endDate: "2020-01-06",
+    courses : [
+      {
+        name: "JavaScript"
+      }
+    ],
+    coordinatorName: "Milo Semenov",
+    coordinatorEmail: "milo.semenov@email.com",
+    coordinatorPhone: "0032495959595"
+  },
+
+-->
+<html>
+  <head>
+    <title>Minerva Enrollment Accepted - Training Program</title>
+  </head>
+  <body>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="600"
+    >
+      {{> emailHeader }}
+      <tr>
+        <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td
+                style="color: #555555; font-family: Arial, sans-serif; font-size: 24px;"
+              >
+                Enrollment Accepted - Training Program
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="padding: 20px 0 30px 0; color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;"
+              >
+                Dear
+                {{name}},
+                <br /><br />
+                We are delighted to inform you that your enrollment for the
+                {{trainingName}}
+                has been accepted! Congratulations on taking this important step
+                towards enhancing your skills and knowledge.
+                <br /><br />
+                Details of the training program are as follows:
+                <ul>
+                  <li>Program Name: {{trainingName}}</li>
+                  <li>Program Duration: {{duration}}</li>
+                  <li>Start Date: {{startDate}}</li>
+                  <li>End Date: {{endDate}}</li>
+                  <li>Venue: {{venueName}}, {{venueAddress}}</li>
+                </ul>
+                We believe that this training program will provide you with
+                valuable insights, practical skills, and networking
+                opportunities to excel in your field.
+                <br /><br />
+                Please make sure to mark your calendar and arrive at the venue
+                on time. We recommend bringing a notepad, pen, and any specific
+                materials mentioned in the program details to make the most of
+                your learning experience.
+                <br /><br />
+                If you have any questions or require additional information,
+                please do not hesitate to contact our training coordinator,
+                {{coordinatorName}}, at
+                {{coordinatorEmail}}
+                or
+                {{coordinatorPhone}}. They will be happy to assist you with any
+                queries you may have.
+                <br /><br />
+                We look forward to welcoming you to the training program and
+                witnessing your growth throughout the sessions. We are confident
+                that you will find this experience both enriching and rewarding.
+                <br /><br />
+                Best regards,
+                <br />
+                The Minerva Team
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      {{> emailFooter }}
+    </table>
+  </body>
+</html>

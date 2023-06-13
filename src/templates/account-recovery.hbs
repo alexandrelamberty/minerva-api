@@ -1,0 +1,98 @@
+<!--
+
+  Handlebars mail template.
+
+  Context:
+
+  context: {
+    name: John Doe,
+    email: johndoe@email.com,
+    recoveryUrl:
+      "https://domain.com/account-recovery/e3a428761227ba4c3c4c6946cca7204b",
+  },
+
+-->
+<html>
+  <head>
+    <title>Minerva Account Recovery</title>
+  </head>
+  <body>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="600"
+    >
+      {{> emailHeader }}
+      <tr>
+        <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td
+                style="color: #555555; font-family: Arial, sans-serif; font-size: 24px;"
+              >
+                Account Recovery Instructions
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="padding: 20px 0 30px 0; color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;"
+              >
+                Dear
+                {{name}},
+                <br /><br />
+                We have received a request to recover your Minerva account, and
+                we are here to assist you. We understand that losing access to
+                your account can be frustrating, but we are committed to helping
+                you regain control of your profile.
+                <br /><br />
+                To initiate the account recovery process, please follow the
+                steps outlined below:
+                <ol>
+                  <li>Visit the Minerva account recovery page:
+                    <a href="{{recoveryUrl}}">{{recoveryUrl}}</a></li>
+                  <li>Enter the email address associated with your Minerva
+                    account:
+                    {{email}}</li>
+                  <li>Complete the security verification process by providing
+                    the requested information.</li>
+                  <li>Submit the account recovery request by clicking on the
+                    "Submit" button.</li>
+                </ol>
+                Once we receive your request, our dedicated support team will
+                review the provided information and take the necessary steps to
+                recover your account. Please note that this process may take
+                some time, as we prioritize account security.
+                <br /><br />
+                If your account recovery request is approved, we will send you a
+                separate email with instructions on how to reset your password
+                and regain access to your Minerva account.
+                <br /><br />
+                In the meantime, we recommend reviewing your email account's
+                spam or junk folder to ensure that any future correspondence
+                from Minerva is not filtered out.
+                <br /><br />
+                If you did not initiate the account recovery process or believe
+                your account may have been compromised, please contact our
+                support team immediately at
+                <a href="mailto:mail@eevos.be">mail@eevos.be</a>. We take the
+                security of your account seriously and will investigate any
+                unauthorized access promptly.
+                <br /><br />
+                Thank you for your cooperation. We apologize for any
+                inconvenience caused and appreciate your patience throughout
+                this process.
+                <br /><br />
+                Best regards,
+                <br />
+                The Minerva Support Team
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      {{> emailFooter }}
+    </table>
+  </body>
+</html>

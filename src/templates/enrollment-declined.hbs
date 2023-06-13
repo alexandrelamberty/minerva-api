@@ -1,0 +1,80 @@
+<!--
+
+  Handlebars mail template.
+
+  Context:
+
+  context: {
+    name: John Doe,
+    trainingName: "Full Stack Web Development"
+    coordinatorName: "Milo Semenov",
+    coordinatorEmail: "milo.semenov@email.com",
+    coordinatorPhone: "0032495959595"
+  },
+
+-->
+<html>
+  <head>
+    <title>Minerva Enrollment Declined - Training Program</title>
+  </head>
+  <body>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="600"
+    >
+      {{> emailHeader }}
+      <tr>
+        <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td
+                style="color: #555555; font-family: Arial, sans-serif; font-size: 24px;"
+              >
+                Enrollment Declined - Training Program
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="padding: 20px 0 30px 0; color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;"
+              >
+                Dear
+                {{name}},
+                <br /><br />
+                We regret to inform you that your enrollment for the
+                {{trainingName}}
+                has been declined. We appreciate your interest in the program
+                and understand that this may be disappointing news for you.
+                <br /><br />
+                Due to various reasons, we had to make a difficult decision, and
+                unfortunately, we are unable to accommodate your enrollment
+                request at this time. We encourage you to explore other training
+                opportunities that align with your goals and interests.
+                <br /><br />
+                We apologize for any inconvenience caused and appreciate your
+                understanding. If you have any questions or need further
+                clarification regarding the decision, please feel free to reach
+                out to our training coordinator,
+                {{coordinatorName}}, at
+                {{coordinatorEmail}}
+                or
+                {{coordinatorPhone}}.
+                <br /><br />
+                We value your interest in our organization and hope to have the
+                opportunity to assist you in the future. Thank you for
+                considering our training program.
+                <br /><br />
+                Best regards,
+                <br />
+                The Minerva Team
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      {{> emailFooter }}
+    </table>
+  </body>
+</html>

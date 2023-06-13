@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>Minerva Course Schedule Update</title>
+  </head>
+  <body>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="600"
+    >
+      {{> emailHeader }}
+      <tr>
+        <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td
+                style="color: #555555; font-family: Arial, sans-serif; font-size: 24px;"
+              >
+                Minerva Course Schedule Update
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="padding: 20px 0 30px 0; color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;"
+              >
+                Dear
+                {{username}},
+                <br /><br />
+                We would like to inform you about an update to the course
+                schedule for the
+                {{courseName}}. Please take note of the following changes:
+                <br /><br />
+                <strong>Old Schedule:</strong>
+                <ul>
+                  <li>Date: {{oldDate}}</li>
+                  <li>Time: {{oldTime}}</li>
+                  <li>Location: {{oldLocation}}</li>
+                </ul>
+                <strong>New Schedule:</strong>
+                <ul>
+                  <li>Date: {{newDate}}</li>
+                  <li>Time: {{newTime}}</li>
+                  <li>Location: {{newLocation}}</li>
+                </ul>
+                We apologize for any inconvenience caused by this change. We
+                have made the necessary adjustments to ensure a smooth
+                continuation of the training program.
+                <br /><br />
+                If you have any questions or concerns regarding the updated
+                schedule, please feel free to contact our training coordinator,
+                {{coordinatorName}}, at
+                {{coordinatorEmail}}
+                or
+                {{coordinatorPhone}}. They will be happy to assist you.
+                <br /><br />
+                We appreciate your understanding and flexibility regarding this
+                schedule update. Thank you for your participation in the
+                training program.
+                <br /><br />
+                Best regards,
+                <br />
+                The Minerva Team
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+     {{> emailFooter }}
+    </table>
+  </body>
+</html>
