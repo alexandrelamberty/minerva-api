@@ -1,33 +1,12 @@
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 
+const transporter = require("../config/config.mailer");
 const SENDER = process.env.EMAIL_GMAIL;
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_GMAIL,
-    pass: process.env.EMAIL_GMAIL_PWD,
-  },
-});
-
-transporter.use(
-  "compile",
-  hbs({
-    viewEngine: {
-      extname: ".hbs",
-      layoutsDir: "./src/templates/",
-      defaultLayout: false,
-      partialsDir: "./src/templates/",
-    },
-    viewPath: "./src/templates/",
-    extName: ".hbs",
-  })
-);
 
 async function mailPromise(options) {
   return new Promise((resolve, reject) => {
-    transporter.sendMail(options, function (error, info) {
+    transporter().sendMail(options, function (error, info) {
       if (error) {
         console.log("Email error: ", error);
         resolve(false);
@@ -67,7 +46,6 @@ module.exports = {
   },
 
   sendRegistrationMail: async (name, email) => {
-    //
     const mailOptions = {
       from: SENDER,
       to: email,
