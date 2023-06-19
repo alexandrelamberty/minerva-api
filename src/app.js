@@ -1,6 +1,7 @@
 require("dotenv").config();
 require("express-async-errors");
 
+const http = require("http");
 const express = require("express");
 const cors = require("cors");
 
@@ -41,5 +42,5 @@ app.use("/", router);
 
 // Starting the application
 app.listen(process.env.API_PORT, () => {
-  console.log(`Server API started on port:${process.env.API_PORT}`);
+  console.log(`API server started on port:${process.env.API_PORT}`);
 });

@@ -73,14 +73,6 @@ OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
 
 To use the provided Docker service refer to the main project [Minerva](https://github.com/alexandrelamberty/minerva).
 
-### Usages
-
-Start the application in watch mode
-
-```shell
-npm run star:dev
-```
-
 ## Migrations
 
 Run the migrations
@@ -113,6 +105,14 @@ Roll back seeding
 
 ```shell
 npm run seed:undo
+```
+
+### Start the application
+
+Start the application in watch mode
+
+```shell
+npm run star:dev
 ```
 
 ## Tests
@@ -172,3 +172,5 @@ npm run spell
 - <https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58>
 - <https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58>
 - <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status>
+<https://github.com/websockets/ws>
+- <https://socket.io/docs/v4/>

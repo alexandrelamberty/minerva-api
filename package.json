@@ -7,7 +7,9 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "start:dev": "nodemon src/app.js",
+    "start:ws": "node src/ws.js",
+    "watch": "nodemon src/app.js",
+    "watch:socket": "nodemon src/ws-io.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate:up": "npx sequelize-cli db:migrate",
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
@@ -29,6 +31,7 @@
     "prettier": "^2.8.8"
   },
   "dependencies": {
+    "@socket.io/admin-ui": "^0.5.1",
     "argon2": "^0.30.3",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
@@ -40,8 +43,10 @@
     "mysql2": "^3.2.0",
     "openai": "^3.2.1",
     "sequelize": "^6.28.0",
+    "socket.io": "^4.6.2",
     "tedious": "^15.1.3",
     "uuid": "^9.0.0",
+    "ws": "^8.13.0",
     "yup": "^1.0.2"
   }
 }

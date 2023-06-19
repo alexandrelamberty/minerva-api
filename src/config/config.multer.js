@@ -6,7 +6,7 @@ const uuid = require("uuid");
  *
  * @module config/multer
  * @see {@link http://expressjs.com/en/resources/middleware/multer.html|Express multer middleware}
- * @param {*} folder
+ * @param {string} folder
  * @returns {multer.StorageEngine}
  */
 const config = (folder) => {

@@ -25,7 +25,7 @@ module.exports = (yupValidator) => {
 
       next();
     } catch (error) {
-      return res.status(400).json(new ErrorResponse(error.errors));
+      return res.status(400).json(new ErrorResponse(error.message));
     }
   };
 };
