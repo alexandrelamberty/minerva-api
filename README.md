@@ -172,5 +172,5 @@ npm run spell
 - <https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58>
 - <https://medium.com/@jsmney/a-more-in-depth-look-at-sequelizes-magic-methods-428928c70d58>
 - <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status>
-<https://github.com/websockets/ws>
+  <https://github.com/websockets/ws>
 - <https://socket.io/docs/v4/>
