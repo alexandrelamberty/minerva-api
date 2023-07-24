@@ -27,22 +27,28 @@ For the full set of features refer to the API [documentation](See the [Minerva](
 
 ## Technologies
 
+- [JavaScript](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
 - [Node.js](https://nodejs.org/en)
 - [Express.js](https://expressjs.com/)
 - [Sequelize](https://sequelize.org/)
 - [OpenAI API](https://platform.openai.com/docs/api-reference)
 - [JSON Web Token](https://www.npmjs.com/package/jsonwebtoken)
+- [Socket.io](https://socket.io/)
 
 ## Requirements
 
 - [Docker](https://www.docker.com/)
 - [NPM](https://www.npmjs.com/package/jsonwebtoken)
 
+## Project Structure / Organization
+
+This project is organized in roles.
+
 ## Usage
 
 See the [Minerva](https://github.com/alexandrelamberty/minerva) project.
 
-## Development
+### Development
 
 This backend relies on a running MySQL database to function. You can either use your own instance of a MySQL database or use a Docker service that provide that.
 
@@ -73,7 +79,7 @@ OPENAI_API_KEY=d7a481461577ba4c3c4c6946cca7204b
 
 To use the provided Docker service refer to the main project [Minerva](https://github.com/alexandrelamberty/minerva).
 
-## Migrations
+### Migrations
 
 Run the migrations
 
@@ -115,7 +121,7 @@ Start the application in watch mode
 npm run star:dev
 ```
 
-## Tests
+### Tests
 
 > // TODO: Implement section
 
@@ -160,6 +166,8 @@ npm run format
 ```shell
 npm run spell
 ```
+
+## Versioning
 
 ## References
 
